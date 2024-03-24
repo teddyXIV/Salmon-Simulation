@@ -16,6 +16,7 @@ Provide a visualization of Chinook Salmon migration up the Columbia River and it
 
 ## Tools and Tech: 
 * React 
+* Redux Toolkit
 * Mapbox GL
 * Python
 * Web Scraping tools i.e. BeautifulSoup 
