@@ -4,4 +4,4 @@
 * Exploring backend options 
 * Researching the use of Mapbox GL JS for dynamically visualizing and animating data
 * Building mapbox demo project
-    * Rendering map of washington
+    * Rendering map of my home town
