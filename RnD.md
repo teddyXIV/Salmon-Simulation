@@ -8,5 +8,6 @@
     * Rendering map of my home town
 * Created wbescraper for 2023 fish count data
 * Internship cover letters
+* Completed internship materials 
 
 
