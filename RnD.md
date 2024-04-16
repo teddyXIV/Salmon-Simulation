@@ -7,4 +7,6 @@
 * Building mapbox demo project
     * Rendering map of my home town
 * Created wbescraper for 2023 fish count data
+* Internship cover letters
+
 
