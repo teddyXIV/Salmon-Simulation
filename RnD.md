@@ -10,4 +10,7 @@
 * Internship cover letters
 * Completed internship materials 
 
+#### 4/17
+* Project planning
+
 
