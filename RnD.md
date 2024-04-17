@@ -12,5 +12,6 @@
 
 #### 4/17
 * Project planning
+* Adding celery to project for running web scraping operations
 
 
