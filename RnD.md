@@ -13,5 +13,6 @@
 #### 4/17
 * Project planning
 * Adding celery to project for running web scraping operations
+* moved on from celery, dont need. Building web scraper for map data
 
 
