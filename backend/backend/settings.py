@@ -16,6 +16,12 @@ import os
 
 load_dotenv()
 
+dbconfig_name = os.getenv("DBCONFIG_NAME")
+dbconfig_user = os.getenv("DBCONFIG_USER")
+dbconfig_password = os.getenv("DBCONFIG_PASSWORD")
+dbconfig_host = os.getenv("DBCONFIG_HOST")
+dbconfig_port = os.getenv("DBCONFIG_PORT")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,7 +41,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -74,7 +80,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -89,8 +95,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": dbconfig_name,
+        "USER": dbconfig_user,
+        "PASSWORD": dbconfig_password,
+        "HOST": dbconfig_host,
+        "PORT": dbconfig_port,
     }
 }
 
