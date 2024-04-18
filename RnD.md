@@ -16,5 +16,6 @@
 * moved on from celery, dont need. Building web scraper for map data
 * Forgot to be committing here. Spent the afternoon building a web scraper that can submit a form on a web page and scrape data on the resulting page and upload to db
 * Establishing db connection with scraper
+* Successfully scraping all required data, database is populated
 
 
