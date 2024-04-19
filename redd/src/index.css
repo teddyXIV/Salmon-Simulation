@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* @import "@arcgis/core/assets/esri/themes/dark/main.css" */
+@import "@arcgis/core/assets/esri/themes/dark/main.css"
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
