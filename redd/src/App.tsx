@@ -1,11 +1,11 @@
 import './App.css'
-import Test from './components/Test'
+import RiverMap from './components/RiverMap'
 
 function App() {
 
   return (
     <>
-      <Test />
+      <RiverMap />
     </>
   )
 }
