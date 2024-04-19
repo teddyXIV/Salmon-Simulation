@@ -5,6 +5,7 @@ import Graphic from "@arcgis/core/Graphic";
 import Point from "@arcgis/core/geometry/Point";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 import { useEffect, useRef } from "react";
+import { damData } from "../data/damLocationData";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -19,28 +20,30 @@ const RiverMap = () => {
             map: map,
             container: mapRef.current,
             center: [-121.35, 46.25],
-            zoom: 8.5,
+            zoom: 8,
             // scale: 54000
         });
 
         const graphicsLayer = new GraphicsLayer();
         view.map.add(graphicsLayer);
 
-        const point = new Point({
-            longitude: -121.941,
-            latitude: 45.645,
-        });
+        damData.forEach(dam => {
+            const point = new Point({
+                longitude: dam.long,
+                latitude: dam.lat,
+            });
 
-        const marker = new SimpleMarkerSymbol({
-            color: "green",
+            const marker = new SimpleMarkerSymbol({
+                color: "green",
+            })
+
+            const damPoint = new Graphic({
+                geometry: point,
+                symbol: marker
+            });
+
+            graphicsLayer.add(damPoint);
         })
-
-        const damPoint = new Graphic({
-            geometry: point,
-            symbol: marker
-        });
-
-        graphicsLayer.add(damPoint);
 
         return () => {
             view.destroy()
