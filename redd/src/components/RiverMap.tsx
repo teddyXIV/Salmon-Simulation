@@ -19,9 +19,9 @@ const RiverMap = () => {
         const view = new MapView({
             map: map,
             container: mapRef.current,
-            center: [-121.35, 46.25],
-            zoom: 8,
-            // scale: 54000
+            center: [-121.35, 46.65],
+            // zoom: 8,
+            scale: 2300000
         });
 
         const graphicsLayer = new GraphicsLayer();
@@ -52,7 +52,7 @@ const RiverMap = () => {
 
     return (
         <div className="flex justify-center items-center h-screen bg-green-600">
-            <div className="h-[500px] w-full lg:w-5/6 bg-green-900" ref={mapRef}></div>
+            <div className="h-[700px] w-full lg:w-5/6 bg-green-900" ref={mapRef}></div>
         </div>
     )
 }
