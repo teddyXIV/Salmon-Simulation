@@ -18,4 +18,7 @@
 * Establishing db connection with scraper
 * Successfully scraping all required data, database is populated
 
+#### 4/21
+* Adjusting DB and web scraper to establish db table relationships
+
 

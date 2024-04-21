@@ -4,7 +4,7 @@ class Dam(models.Model):
     name = models.CharField(max_length=50)
 
 class FishCount(models.Model):
-    date = models.DateField
+    date = models.DateField()
     count = models.IntegerField(default=0)
     dam = models.ForeignKey(Dam, on_delete=models.CASCADE)
 
