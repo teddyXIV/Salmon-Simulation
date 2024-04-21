@@ -72,12 +72,23 @@ export const damCountSlice = createSlice({
                     break;
             }
 
+        },
+        clearData: (state: DamCounts) => {
+            state.bon = [];
+            state.tda = [];
+            state.jda = [];
+            state.mcn = [];
+            state.prd = [];
+            state.wan = [];
+            state.ris = [];
+            state.rrh = [];
+            state.wel = [];
         }
     }
 })
 
 export default damCountSlice.reducer;
 
-export const { setCount } = damCountSlice.actions;
+export const { setCount, clearData } = damCountSlice.actions;
 
 export const selectDamCount = (state: RootState) => state.damCount
