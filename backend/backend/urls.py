@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from fish_ladder.views import *
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('', SalmonSimView.as_view(), name="xxx"),
 ]

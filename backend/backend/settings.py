@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'django.contrib.admin',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -64,8 +65,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permission.AllowAny']}
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny']}
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 
