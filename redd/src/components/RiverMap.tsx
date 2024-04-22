@@ -1,11 +1,5 @@
-import MapView from "@arcgis/core/views/MapView";
-import Map from "@arcgis/core/Map";
-import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
-import Graphic from "@arcgis/core/Graphic";
-import Point from "@arcgis/core/geometry/Point";
-import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 import { useEffect, useRef } from "react";
-import { damData } from "../data/damLocationData";
+import { createMap } from "../helpers/arcGisHelpers/createMap"
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -13,37 +7,7 @@ const RiverMap = () => {
     useEffect(() => {
         if (!mapRef?.current) return;
 
-        const map = new Map({
-            basemap: 'topo',
-        })
-        const view = new MapView({
-            map: map,
-            container: mapRef.current,
-            center: [-121.35, 46.65],
-            // zoom: 8,
-            scale: 2300000
-        });
-
-        const graphicsLayer = new GraphicsLayer();
-        view.map.add(graphicsLayer);
-
-        damData.forEach(dam => {
-            const point = new Point({
-                longitude: dam.long,
-                latitude: dam.lat,
-            });
-
-            const marker = new SimpleMarkerSymbol({
-                color: "green",
-            })
-
-            const damPoint = new Graphic({
-                geometry: point,
-                symbol: marker
-            });
-
-            graphicsLayer.add(damPoint);
-        })
+        const view = createMap(mapRef.current)
 
         return () => {
             view.destroy()

@@ -12,8 +12,8 @@ class SalmonSimView(APIView):
     serializer_class = CountSerializer
 
     def get(self, request):
-        start_date_str = request.data.get('startDate')
-        end_date_str = request.data.get('endDate')
+        start_date_str = request.GET.get('startDate')
+        end_date_str = request.GET.get('endDate')
 
         if not start_date_str or not end_date_str:
             raise NotFound("A start and end date are required.")
