@@ -1,4 +1,4 @@
-import damCountReducer, { setCount } from '../redux/damCountSlice'
+import damCountReducer, { setCount, clearData } from '../redux/damCountSlice'
 import { expect, describe, test } from 'vitest'
 
 describe("damCountSlice", () => {
@@ -51,7 +51,37 @@ describe("damCountSlice", () => {
             wel: [{ date: "2023-07-01", salmon_count: 4 }]
         }
 
-        const updatedState = damCountReducer(initialState, setCount(testData))
-        expect(updatedState).toEqual(expected)
+        const updatedState = damCountReducer(initialState, setCount(testData));
+        expect(updatedState).toEqual(expected);
+    })
+
+    test("Should clear the values in the damCount state", () => {
+        const initialState = {
+            bon: [{ date: "2023-07-01", salmon_count: 1 }],
+            tda: [{ date: "2023-07-01", salmon_count: 2 }],
+            jda: [{ date: "2023-07-01", salmon_count: 3 }],
+            mcn: [],
+            prd: [],
+            wan: [],
+            ris: [],
+            rrh: [],
+            wel: [{ date: "2023-07-01", salmon_count: 4 }]
+        }
+
+        const expected = {
+            bon: [],
+            tda: [],
+            jda: [],
+            mcn: [],
+            prd: [],
+            wan: [],
+            ris: [],
+            rrh: [],
+            wel: []
+        }
+
+        const clearedState = damCountReducer(initialState, clearData());
+
+        expect(clearedState).toEqual(expected);
     })
 })
