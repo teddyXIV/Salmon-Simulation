@@ -28,27 +28,31 @@ describe("damCountSlice", () => {
 
     test("Should add the date and count values to the correct dam state slice", () => {
         const initialState = {
-            bon: [],
-            tda: [],
-            jda: [],
-            mcn: [],
-            prd: [],
-            wan: [],
-            ris: [],
-            rrh: [],
-            wel: []
+            allCounts: {
+                bon: [],
+                tda: [],
+                jda: [],
+                mcn: [],
+                prd: [],
+                wan: [],
+                ris: [],
+                rrh: [],
+                wel: []
+            }
         }
 
         const expected = {
-            bon: [{ date: "2023-07-01", salmon_count: 1 }],
-            tda: [{ date: "2023-07-01", salmon_count: 2 }],
-            jda: [{ date: "2023-07-01", salmon_count: 3 }],
-            mcn: [],
-            prd: [],
-            wan: [],
-            ris: [],
-            rrh: [],
-            wel: [{ date: "2023-07-01", salmon_count: 4 }]
+            allCounts: {
+                bon: [{ date: "2023-07-01", salmon_count: 1 }],
+                tda: [{ date: "2023-07-01", salmon_count: 2 }],
+                jda: [{ date: "2023-07-01", salmon_count: 3 }],
+                mcn: [],
+                prd: [],
+                wan: [],
+                ris: [],
+                rrh: [],
+                wel: [{ date: "2023-07-01", salmon_count: 4 }]
+            }
         }
 
         const updatedState = damCountReducer(initialState, setCount(testData));
@@ -57,27 +61,31 @@ describe("damCountSlice", () => {
 
     test("Should clear the values in the damCount state", () => {
         const initialState = {
-            bon: [{ date: "2023-07-01", salmon_count: 1 }],
-            tda: [{ date: "2023-07-01", salmon_count: 2 }],
-            jda: [{ date: "2023-07-01", salmon_count: 3 }],
-            mcn: [],
-            prd: [],
-            wan: [],
-            ris: [],
-            rrh: [],
-            wel: [{ date: "2023-07-01", salmon_count: 4 }]
+            allCounts: {
+                bon: [{ date: "2023-07-01", salmon_count: 1 }],
+                tda: [{ date: "2023-07-01", salmon_count: 2 }],
+                jda: [{ date: "2023-07-01", salmon_count: 3 }],
+                mcn: [],
+                prd: [],
+                wan: [],
+                ris: [],
+                rrh: [],
+                wel: [{ date: "2023-07-01", salmon_count: 4 }]
+            }
         }
 
         const expected = {
-            bon: [],
-            tda: [],
-            jda: [],
-            mcn: [],
-            prd: [],
-            wan: [],
-            ris: [],
-            rrh: [],
-            wel: []
+            allCounts: {
+                bon: [],
+                tda: [],
+                jda: [],
+                mcn: [],
+                prd: [],
+                wan: [],
+                ris: [],
+                rrh: [],
+                wel: []
+            }
         }
 
         const clearedState = damCountReducer(initialState, clearData());

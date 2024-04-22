@@ -1,50 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
+import type { AllCounts, DamCounts, SalmonCount, DamUpdate } from "../damCountTypes"
 
-interface DamCounts {
-    bon: SalmonCount[],
-    tda: SalmonCount[],
-    jda: SalmonCount[],
-    mcn: SalmonCount[],
-    prd: SalmonCount[],
-    wan: SalmonCount[],
-    ris: SalmonCount[],
-    rrh: SalmonCount[],
-    wel: SalmonCount[],
-}
-
-interface SalmonCount {
-    date: string,
-    salmon_count: number
-}
-
-interface DamUpdate {
-    date: string,
-    count: number,
-    dam: number
-}
-
-const initialState: DamCounts = {
-    bon: [],
-    tda: [],
-    jda: [],
-    mcn: [],
-    prd: [],
-    wan: [],
-    ris: [],
-    rrh: [],
-    wel: []
+const initialState: AllCounts = {
+    allCounts: {
+        bon: [],
+        tda: [],
+        jda: [],
+        mcn: [],
+        prd: [],
+        wan: [],
+        ris: [],
+        rrh: [],
+        wel: []
+    }
 }
 
 export const damCountSlice = createSlice({
     name: 'damCount',
     initialState,
     reducers: {
-        setCount: (state: DamCounts, action: PayloadAction<DamUpdate[]>) => {
+        setCount: (state: AllCounts, action: PayloadAction<DamUpdate[]>) => {
 
             action.payload.forEach(el => {
-                const storeData = {
+                const storeData: SalmonCount = {
                     date: el.date,
                     salmon_count: el.count,
                 }
@@ -62,19 +42,19 @@ export const damCountSlice = createSlice({
                 }
 
                 const damKey = damMap[el.dam];
-                state[damKey].push(storeData)
+                state.allCounts[damKey].push(storeData)
             });
         },
-        clearData: (state: DamCounts) => {
-            state.bon = [];
-            state.tda = [];
-            state.jda = [];
-            state.mcn = [];
-            state.prd = [];
-            state.wan = [];
-            state.ris = [];
-            state.rrh = [];
-            state.wel = [];
+        clearData: (state: AllCounts) => {
+            state.allCounts.bon = [];
+            state.allCounts.tda = [];
+            state.allCounts.jda = [];
+            state.allCounts.mcn = [];
+            state.allCounts.prd = [];
+            state.allCounts.wan = [];
+            state.allCounts.ris = [];
+            state.allCounts.rrh = [];
+            state.allCounts.wel = [];
         }
     }
 })
@@ -83,4 +63,4 @@ export default damCountSlice.reducer;
 
 export const { setCount, clearData } = damCountSlice.actions;
 
-export const selectDamCount = (state: RootState) => state.damCount
+export const selectDamCounts = (state: RootState) => state.damCount.allCounts
