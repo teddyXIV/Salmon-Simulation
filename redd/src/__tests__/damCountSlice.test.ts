@@ -52,6 +52,6 @@ describe("damCountSlice", () => {
         }
 
         const updatedState = damCountReducer(initialState, setCount(testData))
-        expect(updatedState).toEqual({ expected })
+        expect(updatedState).toEqual(expected)
     })
 })
