@@ -20,5 +20,6 @@
 
 #### 4/21
 * Adjusting DB and web scraper to establish db table relationships
+* Adjusted scraper to handle edge cases smoothly
 
 
