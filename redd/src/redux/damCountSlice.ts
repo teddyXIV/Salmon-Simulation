@@ -22,7 +22,7 @@ interface SalmonCount {
 interface DamUpdate {
     date: string,
     count: number,
-    dam_id: number
+    dam: number
 }
 
 const initialState: DamCounts = {
@@ -61,7 +61,7 @@ export const damCountSlice = createSlice({
                     9: 'wel'
                 }
 
-                const damKey = damMap[el.dam_id];
+                const damKey = damMap[el.dam];
                 state[damKey].push(storeData)
             });
         },

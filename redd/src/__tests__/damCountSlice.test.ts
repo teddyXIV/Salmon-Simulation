@@ -7,22 +7,22 @@ describe("damCountSlice", () => {
         {
             date: "2023-07-01",
             count: 1,
-            dam_id: 1
+            dam: 1
         },
         {
             date: "2023-07-01",
             count: 2,
-            dam_id: 2
+            dam: 2
         },
         {
             date: "2023-07-01",
             count: 3,
-            dam_id: 3
+            dam: 3
         },
         {
             date: "2023-07-01",
             count: 4,
-            dam_id: 9
+            dam: 9
         }
     ];
 
