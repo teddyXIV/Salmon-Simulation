@@ -25,4 +25,7 @@
 #### 4/22 
 * interview prep
 
+#### 4/23 
+* ArcGIS API exploration. Attempting to get geographic data of columbia river and display it on map
+
 

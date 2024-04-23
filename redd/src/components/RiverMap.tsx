@@ -1,25 +1,25 @@
 import { useEffect, useRef } from "react";
 import { createMap } from "../helpers/arcGisHelpers/createMap"
-import { getData } from "../helpers/dataHelpers/getData";
-import { useDispatch, useSelector } from "react-redux"
-import { selectDamCounts, setCount } from "../redux/damCountSlice"
+// import { getData } from "../helpers/dataHelpers/getData";
+// import { useDispatch, useSelector } from "react-redux"
+// import { selectDamCounts, setCount } from "../redux/damCountSlice"
 
 const RiverMap = () => {
     const mapRef = useRef(null)
-    const dispatch = useDispatch()
-    const allCounts = useSelector(selectDamCounts)
+    // const dispatch = useDispatch()
+    // const allCounts = useSelector(selectDamCounts)
 
 
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
-        const fetchData = async () => {
-            const countData = await getData();
-            dispatch(setCount(countData))
-        }
-        fetchData();
-        console.log(allCounts)
+        // const fetchData = async () => {
+        //     const countData = await getData();
+        //     dispatch(setCount(countData))
+        // }
+        // fetchData();
+        // console.log(allCounts)
 
         return () => {
             view.destroy()

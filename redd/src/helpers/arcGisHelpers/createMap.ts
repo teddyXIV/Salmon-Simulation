@@ -13,7 +13,7 @@ export const createMap = (mapRef: HTMLDivElement) => {
     const newView = new MapView({
         map: map,
         container: mapRef,
-        center: [-121.35, 46.65],
+        center: [-121.35, 46.75],
         scale: 2300000
     });
 
