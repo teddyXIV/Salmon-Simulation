@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { createMap } from "../helpers/arcGisHelpers/createMap"
+import { createMap, addDamLayer, addRiverLayer } from "../helpers/arcGisHelpers/createMap"
 // import { getData } from "../helpers/dataHelpers/getData";
 // import { useDispatch, useSelector } from "react-redux"
 // import { selectDamCounts, setCount } from "../redux/damCountSlice"
@@ -14,6 +14,9 @@ const RiverMap = () => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
+        addRiverLayer(view.map);
+        addDamLayer(view.map);
+
         // const fetchData = async () => {
         //     const countData = await getData();
         //     dispatch(setCount(countData))
