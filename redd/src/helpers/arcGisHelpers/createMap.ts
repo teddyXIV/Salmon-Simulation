@@ -4,6 +4,7 @@ import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
 import Point from "@arcgis/core/geometry/Point";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+import TextSymbol from "@arcgis/core/symbols/TextSymbol";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
@@ -33,8 +34,21 @@ export const addDamLayer = (map: Map) => {
             latitude: dam.lat,
         });
 
+        const labelPoint = new Point({
+            longitude: dam.long,
+            latitude: dam.lat + 0.05
+        })
+
         const marker = new SimpleMarkerSymbol({
             color: "green",
+        })
+
+        const label = new TextSymbol({
+            text: dam.name,
+            color: "black",
+            font: {
+                size: 12,
+            }
         })
 
         const damPoint = new Graphic({
@@ -42,7 +56,12 @@ export const addDamLayer = (map: Map) => {
             symbol: marker
         });
 
-        graphicsLayer.add(damPoint);
+        const damLabel = new Graphic({
+            geometry: labelPoint,
+            symbol: label
+        })
+
+        graphicsLayer.addMany([damPoint, damLabel]);
     })
 
     map.add(graphicsLayer)
@@ -50,8 +69,8 @@ export const addDamLayer = (map: Map) => {
 
 export const addRiverLayer = (map: Map) => {
     const riverSymbol = new SimpleLineSymbol({
-        color: [0, 0, 255],
-        width: 3
+        color: [13, 190, 229],
+        width: 4
     })
 
     const renderer = new SimpleRenderer({
