@@ -33,5 +33,6 @@
 #### 4/24 
 * Fish research, planning, and data collection
 * Working with qgis software to generate geo data for map. WIP 
+* Interviewing
 
 

@@ -9,6 +9,8 @@ import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
+import * as geometryEngine from "@arcgis/core/geometry/geometryEngine";
+import Polyline from "@arcgis/core/geometry/Polyline";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({
@@ -85,4 +87,29 @@ export const addRiverLayer = (map: Map) => {
     })
 
     map.add(riverLayer)
+
+    riverLayer.when(function () {
+        riverLayer.queryFeatures().then(function (result) {
+            const riverGeometry = result.features[0].geometry;
+            const polylineRiverGeo = riverGeometry as Polyline;
+
+            const distanceBetweenPoints = 1000;
+            const points = geometryEngine.geodesicDensify(polylineRiverGeo, distanceBetweenPoints, "meters");
+
+            const pointsGraphic = new Graphic({
+                geometry: {
+                    type: "multipoint",
+                    points: points
+                } as Multipoint,
+                symbol: {
+                    type: "simple-marker",
+                    color: "red",
+                    size: 6
+                } as SimpleMarkerSymbol
+            });
+
+            map.add(pointsGraphic)
+        })
+    })
+
 }
