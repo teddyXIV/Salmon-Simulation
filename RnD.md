@@ -30,4 +30,7 @@
 * Interview prep. 
 * Completed job interview
 
+#### 4/24 
+* Fish research, planning, and data collection
+
 
