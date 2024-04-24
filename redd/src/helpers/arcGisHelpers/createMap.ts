@@ -11,6 +11,7 @@ import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
 import * as geometryEngine from "@arcgis/core/geometry/geometryEngine";
 import Polyline from "@arcgis/core/geometry/Polyline";
+import Multipoint from "@arcgis/core/geometry/Multipoint";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({
@@ -93,22 +94,31 @@ export const addRiverLayer = (map: Map) => {
             const riverGeometry = result.features[0].geometry;
             const polylineRiverGeo = riverGeometry as Polyline;
 
-            const distanceBetweenPoints = 1000;
-            const points = geometryEngine.geodesicDensify(polylineRiverGeo, distanceBetweenPoints, "meters");
+            const distanceBetweenPoints = 10000;
+            const densifiedPoints = geometryEngine.geodesicDensify(polylineRiverGeo, distanceBetweenPoints, "meters") as Polyline;
 
-            const pointsGraphic = new Graphic({
-                geometry: {
-                    type: "multipoint",
-                    points: points
-                } as Multipoint,
-                symbol: {
-                    type: "simple-marker",
-                    color: "red",
-                    size: 6
-                } as SimpleMarkerSymbol
+            // const points = geometryEngine.geodesicDensify(polylineRiverGeometry, distanceBetweenPoints, "meters");
+
+            const points = densifiedPoints.paths.reduce((acc: any, path) => acc.concat(path), [])
+
+            const multipointGeometry = new Multipoint({
+                points: points
             });
 
-            map.add(pointsGraphic)
+
+
+            const pointsGraphic = new Graphic({
+                geometry: multipointGeometry,
+                symbol: new SimpleMarkerSymbol({
+                    color: "red",
+                    size: 6
+                })
+            });
+
+            const pointsGraphicsLayer = new GraphicsLayer();
+            pointsGraphicsLayer.add(pointsGraphic);
+
+            map.add(pointsGraphicsLayer)
         })
     })
 
