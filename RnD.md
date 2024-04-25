@@ -37,5 +37,6 @@
 
 #### 4/25
 * Inteviewing and collecting geo data
+* Interview and prep for SimBco
 
 
