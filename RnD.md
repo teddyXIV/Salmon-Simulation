@@ -35,4 +35,7 @@
 * Working with qgis software to generate geo data for map. WIP 
 * Interviewing
 
+#### 4/25
+* Inteviewing and collecting geo data
+
 
