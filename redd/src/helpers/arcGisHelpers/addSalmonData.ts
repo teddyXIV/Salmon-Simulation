@@ -10,6 +10,7 @@ import TextSymbol from "@arcgis/core/symbols/TextSymbol";
 // import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { BonToTda } from "../../data/riverPointsData";
 import { SalmonCount } from "../../damCountTypes";
+import { testCounts } from "../../data/testData";
 
 export const addSalmonPoints = (map: Map, startDamCount: SalmonCount, endDamCount: SalmonCount) => {
     const graphicsLayer = new GraphicsLayer();
@@ -19,7 +20,6 @@ export const addSalmonPoints = (map: Map, startDamCount: SalmonCount, endDamCoun
     let multiplier = 0;
 
     BonToTda.forEach(point => {
-        console.log(damDiff)
         const count = Math.round(startDamCount.salmon_count - (salmonCountDecrement * multiplier))
 
         const dataPoint = new Point({
@@ -27,21 +27,8 @@ export const addSalmonPoints = (map: Map, startDamCount: SalmonCount, endDamCoun
             latitude: point.lat,
         });
 
-        const labelPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat + 0.05
-        })
-
         const marker = new SimpleMarkerSymbol({
-            color: "green",
-        })
-
-        const label = new TextSymbol({
-            text: count.toString(),
-            color: "black",
-            font: {
-                size: 12,
-            }
+            color: "red",
         })
 
         const riverPoint = new Graphic({
@@ -51,6 +38,21 @@ export const addSalmonPoints = (map: Map, startDamCount: SalmonCount, endDamCoun
                 salmonEst: count
             }
         });
+
+        //Label stuff below
+
+        const labelPoint = new Point({
+            longitude: point.long,
+            latitude: point.lat + 0.05
+        })
+
+        const label = new TextSymbol({
+            text: count.toString(),
+            color: "black",
+            font: {
+                size: 12,
+            }
+        })
 
         const pointLabel = new Graphic({
             geometry: labelPoint,
@@ -62,4 +64,17 @@ export const addSalmonPoints = (map: Map, startDamCount: SalmonCount, endDamCoun
     })
 
     map.add(graphicsLayer)
+}
+
+export const addBonToTdaData = (map: Map, date: number) => {
+    const bon = testCounts.allCounts.bon;
+    const tda = testCounts.allCounts.tda;
+
+
+
+
+
+
+
+
 }

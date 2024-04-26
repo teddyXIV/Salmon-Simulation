@@ -20,7 +20,7 @@ const RiverMap = () => {
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
         addDamLayer(view.map);
-        addSalmonPoints(view.map, testCounts.allCounts.bon[0], testCounts.allCounts.tda[2]);
+        addSalmonPoints(view.map, testCounts.allCounts.bon[5], testCounts.allCounts.tda[7]);
 
         // const fetchData = async () => {
         //     const countData = await getData();
