@@ -200,36 +200,45 @@ export const addMcnToPrdData = (map: Map, date: number) => {
 
     const dayOfCount = mcn[date].salmon_count;
     const dayPriorCount = mcn[date - 1].salmon_count
-    const threePriorCount = mcn[date - 2].salmon_count
-    const fourPriorCount = mcn[date - 3].salmon_count
-    const fivePriorCount = mcn[date - 4].salmon_count
+    const twoPriorCount = mcn[date - 2].salmon_count
+    const threePriorCount = mcn[date - 3].salmon_count
+    const fourPriorCount = mcn[date - 4].salmon_count
 
     const segmentCounts = [
-        Math.round(dayOfCount * 0.04),
-        Math.round(dayOfCount * 0.04),
-        Math.round(dayOfCount * 0.07),
         Math.round(dayOfCount * 0.1),
         Math.round(dayOfCount * 0.15),
-        Math.round(dayOfCount * 0.2),
+        Math.round(dayOfCount * 0.25),
+        Math.round(dayOfCount * 0.25),
         Math.round(dayOfCount * 0.15),
         Math.round(dayOfCount * 0.1),
-        Math.round(dayOfCount * 0.07),
-        Math.round(dayOfCount * 0.04),
-        Math.round(dayOfCount * 0.04),
-        Math.round(dayPriorCount * 0.04),
-        Math.round(dayPriorCount * 0.04),
-        Math.round(dayPriorCount * 0.07),
         Math.round(dayPriorCount * 0.1),
         Math.round(dayPriorCount * 0.15),
-        Math.round(dayPriorCount * 0.2),
+        Math.round(dayPriorCount * 0.25),
+        Math.round(dayPriorCount * 0.25),
         Math.round(dayPriorCount * 0.15),
         Math.round(dayPriorCount * 0.1),
-        Math.round(dayPriorCount * 0.07),
-        Math.round(dayPriorCount * 0.04),
-        Math.round(dayPriorCount * 0.04)
+        Math.round(twoPriorCount * 0.1),
+        Math.round(twoPriorCount * 0.15),
+        Math.round(twoPriorCount * 0.25),
+        Math.round(twoPriorCount * 0.25),
+        Math.round(twoPriorCount * 0.15),
+        Math.round(twoPriorCount * 0.1),
+        Math.round(threePriorCount * 0.1),
+        Math.round(threePriorCount * 0.15),
+        Math.round(threePriorCount * 0.25),
+        Math.round(threePriorCount * 0.25),
+        Math.round(threePriorCount * 0.15),
+        Math.round(threePriorCount * 0.1),
+        Math.round(fourPriorCount * 0.075),
+        Math.round(fourPriorCount * 0.1),
+        Math.round(fourPriorCount * 0.15),
+        Math.round(fourPriorCount * 0.3),
+        Math.round(fourPriorCount * 0.15),
+        Math.round(fourPriorCount * 0.1),
+        Math.round(fourPriorCount * 0.075)
     ];
 
-    const features = jdaToMcn.map((point, i) => {
+    const features = mcnToPrd.map((point, i) => {
         const dataPoint = new Point({
             longitude: point.long,
             latitude: point.lat,
@@ -274,11 +283,14 @@ const createHeatmapRenderer = () => {
         maxDensity: 1,
         minDensity: 0,
         colorStops: [
-            { ratio: 0, color: "rgba(0, 0, 255, 0)" },   // Blue (lowest values)
-            { ratio: 0.2, color: "rgba(0, 0, 255, 1)" }, // Blue (lowest values)
-            { ratio: 0.4, color: "rgba(255, 255, 0, 1)" }, // Yellow
-            { ratio: 0.6, color: "rgba(255, 165, 0, 1)" }, // Orange
+            { ratio: 0, color: "rgba(0, 0, 255, 0)" },    // Blue (lowest values)
+            { ratio: 0.1, color: "rgba(0, 0, 255, 1)" },  // Blue (lowest values)
+            { ratio: 0.3, color: "rgba(0, 255, 255, 1)" },// Cyan
+            { ratio: 0.5, color: "rgba(0, 255, 0, 1)" },  // Green
+            { ratio: 0.6, color: "rgba(255, 255, 0, 1)" },// Yellow
+            { ratio: 0.7, color: "rgba(255, 165, 0, 1)" },// Orange
             { ratio: 0.8, color: "rgba(255, 69, 0, 1)" }, // Reddish
+            { ratio: 0.9, color: "rgba(139, 0, 139, 1)" },// Dark Magenta
             { ratio: 1, color: "rgba(255, 0, 0, 1)" }     // Red (highest values)
         ]
 

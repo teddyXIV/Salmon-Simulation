@@ -15,7 +15,7 @@ const RiverMap = () => {
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-        addSalmonDataLayer(view.map, 3)
+        addSalmonDataLayer(view.map, 6)
         addDamLayer(view.map);
 
         // const fetchData = async () => {
