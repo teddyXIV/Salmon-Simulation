@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { createMap, addDamLayer, addRiverLayer } from "../helpers/arcGisHelpers/createMap"
-import { addSalmonPoints } from "../helpers/arcGisHelpers/addSalmonData";
-import { testCounts } from "../data/testData";
+import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer } from "../helpers/arcGisHelpers/createMap"
+// import { testCounts } from "../data/testData";
 // import { getData } from "../helpers/dataHelpers/getData";
 // import { useDispatch, useSelector } from "react-redux"
 // import { selectDamCounts, setCount } from "../redux/damCountSlice"
@@ -20,7 +19,8 @@ const RiverMap = () => {
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
         addDamLayer(view.map);
-        addSalmonPoints(view.map, testCounts.allCounts.bon[5], testCounts.allCounts.tda[7]);
+        // addSalmonPoints(view.map, testCounts.allCounts.bon[5], testCounts.allCounts.tda[7]);
+        addSalmonDataLayer(view.map, 3)
 
         // const fetchData = async () => {
         //     const countData = await getData();

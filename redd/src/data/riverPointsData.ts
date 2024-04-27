@@ -3,7 +3,7 @@ interface RiverPoints {
     long: number
 }
 
-export const BonToTda: RiverPoints[] = [
+export const bonToTda: RiverPoints[] = [
     { lat: 45.673, long: -121.896 },
     { lat: 45.696, long: -121.841 },
     { lat: 45.7, long: -121.776 },

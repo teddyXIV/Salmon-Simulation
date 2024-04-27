@@ -9,6 +9,7 @@ import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
+import { addBonToTdaData } from "./addSalmonData";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({
@@ -85,5 +86,8 @@ export const addRiverLayer = (map: Map) => {
     })
 
     map.add(riverLayer)
+}
 
+export const addSalmonDataLayer = (map: Map, date: number) => {
+    addBonToTdaData(map, date);
 }
