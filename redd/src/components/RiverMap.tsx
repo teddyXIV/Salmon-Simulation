@@ -10,17 +10,13 @@ const RiverMap = () => {
     // const dispatch = useDispatch()
     // const allCounts = useSelector(selectDamCounts)
 
-
-
-
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-        addDamLayer(view.map);
-        // addSalmonPoints(view.map, testCounts.allCounts.bon[5], testCounts.allCounts.tda[7]);
         addSalmonDataLayer(view.map, 3)
+        addDamLayer(view.map);
 
         // const fetchData = async () => {
         //     const countData = await getData();
