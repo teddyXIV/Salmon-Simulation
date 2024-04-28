@@ -1,29 +1,30 @@
 import { useEffect, useRef } from "react";
 import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer } from "../helpers/arcGisHelpers/createMap"
-// import { testCounts } from "../data/testData";
-// import { getData } from "../helpers/dataHelpers/getData";
-// import { useDispatch, useSelector } from "react-redux"
-// import { selectDamCounts, setCount } from "../redux/damCountSlice"
+import { getData } from "../helpers/dataHelpers/getData";
+import { useDispatch, useSelector } from "react-redux"
+import { selectDamCounts, setCount } from "../redux/damCountSlice"
 
 const RiverMap = () => {
     const mapRef = useRef(null)
-    // const dispatch = useDispatch()
-    // const allCounts = useSelector(selectDamCounts)
+    const dispatch = useDispatch()
+    const allCounts = useSelector(selectDamCounts)
 
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-        addSalmonDataLayer(view.map, 6)
         addDamLayer(view.map);
 
-        // const fetchData = async () => {
-        //     const countData = await getData();
-        //     dispatch(setCount(countData))
-        // }
-        // fetchData();
-        // console.log(allCounts)
+        const fetchData = async () => {
+            const countData = await getData();
+            dispatch(setCount(countData))
+            console.log(allCounts)
+            // addSalmonDataLayer(view.map, allCounts, 20)
+        }
+        fetchData();
+        addSalmonDataLayer(view.map, allCounts, 20)
+
 
         return () => {
             view.destroy()
