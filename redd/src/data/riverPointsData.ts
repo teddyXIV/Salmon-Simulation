@@ -88,12 +88,15 @@ export const mcnToPrd: RiverPoints[] = [
     { lat: 46.6276, long: -119.8718 }
 ]
 
-// export const prdToWan: RiverPoints[] = [
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
+export const prdToWan: RiverPoints[] = [
+    { lat: 46.6862, long: -119.9430 },
+    { lat: 46.7284, long: -119.9736 },
+    { lat: 46.7699, long: -119.9495 },
+    { lat: 46.8132, long: -119.9271 },
+    { lat: 46.8546, long: -119.9609 },
+]
+
+// export const wanToRis: RiverPoints[] = [
 //     { lat: , long: },
 //     { lat: , long: },
 //     { lat: , long: },

@@ -5,7 +5,7 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Point from "@arcgis/core/geometry/Point";
 // import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 // import TextSymbol from "@arcgis/core/symbols/TextSymbol";
-import { bonToTda, tdaToJda, jdaToMcn, mcnToPrd } from "../../data/riverPointsData";
+import { bonToTda, tdaToJda, jdaToMcn, mcnToPrd, prdToWan } from "../../data/riverPointsData";
 import { testCounts } from "../../data/testData";
 import HeatmapRenderer from "@arcgis/core/renderers/HeatmapRenderer";
 
@@ -239,6 +239,58 @@ export const addMcnToPrdData = (map: Map, date: number) => {
     ];
 
     const features = mcnToPrd.map((point, i) => {
+        const dataPoint = new Point({
+            longitude: point.long,
+            latitude: point.lat,
+        });
+
+        return {
+            geometry: dataPoint,
+            attributes: {
+                OBJECTID: i,
+                salmonEst: segmentCounts[i]
+            }
+        };
+    });
+
+    const heatmapRenderer = createHeatmapRenderer();
+
+    const featureLayer = new FeatureLayer({
+        fields: [
+            {
+                name: "OBJECTID",
+                alias: "OBJECTID",
+                type: "oid"
+            },
+            {
+                name: "salmonEst",
+                alias: "Salmon Estimation",
+                type: "integer"
+            }
+        ],
+        objectIdField: "OBJECTID",
+        source: features,
+        renderer: heatmapRenderer
+    });
+
+    map.add(featureLayer);
+}
+
+export const addPrdToWanData = (map: Map, date: number) => {
+
+    const prd = testCounts.allCounts.prd;
+
+    const dayOfCount = prd[date].salmon_count;
+
+    const segmentCounts = [
+        Math.round(dayOfCount * 0.13),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.30),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.13)
+    ];
+
+    const features = prdToWan.map((point, i) => {
         const dataPoint = new Point({
             longitude: point.long,
             latitude: point.lat,
