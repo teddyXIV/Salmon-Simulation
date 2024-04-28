@@ -96,24 +96,40 @@ export const prdToWan: RiverPoints[] = [
     { lat: 46.8546, long: -119.9609 },
 ]
 
-// export const wanToRis: RiverPoints[] = [
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-//     { lat: , long: },
-// ]
+export const wanToRis: RiverPoints[] = [
+    { lat: 46.9194, long: -119.9754 },
+    { lat: 46.9670, long: -119.9793 },
+    { lat: 47.0115, long: -120.0042 },
+    { lat: 47.0560, long: -120.0281 },
+    { lat: 47.1008, long: -120.0279 },
+    { lat: 47.1422, long: -120.0027 },
+    { lat: 47.1874, long: -120.0065 },
+    { lat: 47.2256, long: -120.0232 },
+    { lat: 47.2347, long: -120.0829 },
+    { lat: 47.2803, long: -120.0896 },
+    { lat: 47.3279, long: -120.0856 },
+]
+
+export const risToRrh: RiverPoints[] = [
+    { lat: 47.3665, long: -120.1492 },
+    { lat: 47.3775, long: -120.2165 },
+    { lat: 47.3920, long: -120.2825 },
+    { lat: 47.4343, long: -120.3093 },
+    { lat: 47.4807, long: -120.3134 },
+
+]
+
+export const rrhToWel: RiverPoints[] = [
+    { lat: 47.5699, long: -120.2510 },
+    { lat: 47.6160, long: -120.2346 },
+    { lat: 47.6612, long: -120.2170 },
+    { lat: 47.7048, long: -120.2072 },
+    { lat: 47.7475, long: -120.2098 },
+    { lat: 47.7718, long: -120.1508 },
+    { lat: 47.7633, long: -120.0859 },
+    { lat: 47.7789, long: -120.0196 },
+    { lat: 47.8088, long: -119.9765 },
+    { lat: 47.8510, long: -119.9505 },
+    { lat: 47.8825, long: -119.9094 },
+    { lat: 47.9201, long: -119.8854 },
+]
