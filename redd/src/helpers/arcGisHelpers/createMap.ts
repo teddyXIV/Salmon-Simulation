@@ -10,7 +10,7 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
 import { addBonToTdaData, addJdaToMcnData, addMcnToPrdData, addPrdToWanData, addRisToRrhData, addRrhToWelData, addTdaToJdaData, addWanToRisData } from "./addSalmonData";
-import { DamCounts } from "../../damCountTypes";
+import { DamCounts } from "../../types/damCountTypes";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({

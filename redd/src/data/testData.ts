@@ -1,4 +1,4 @@
-import { AllCounts } from "../damCountTypes";
+import { AllCounts } from "../types/damCountTypes";
 
 export const testCounts: AllCounts = {
     allCounts: {
