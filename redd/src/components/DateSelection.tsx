@@ -1,23 +1,3 @@
-// import DatePicker from "react-date-picker";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectDate, setDate } from "../redux/dateSlice";
-
-
-// const DateSelection = () => {
-//     const dispatch = useDispatch();
-//     const date = useSelector(selectDate)
-
-//     const handleDateChange = (newDate: Date | null) => {
-//         if (newDate) {
-//             dispatch(setDate(newDate.toISOString()))
-//         }
-//     };
-
-//     return <DatePicker className="bg-white" onChange={handleDateChange} value={date} />
-// }
-
-// export default DateSelection;
-
 import DatePicker from "react-date-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDate, setDate } from "../redux/dateSlice";
@@ -37,11 +17,20 @@ const DateSelection = () => {
     };
 
     return (
-        <DatePicker
-            className="bg-white"
-            onChange={handleDateChange}
-            value={new Date(date)}
-        />
+        <>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                setDate(date)
+            }}>
+                <input type="date" id="date-select" />
+                <input type="submit" />
+            </form>
+            {/* <DatePicker
+                className="bg-white w-28"
+                onChange={handleDateChange}
+                value={new Date(date)}
+            /> */}
+        </>
     );
 };
 

@@ -42,18 +42,6 @@ const RiverMap = () => {
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
-        return () => {
-            view.destroy();
-        };
-    }, [])
-
-    useEffect(() => {
-        if (!mapRef?.current) return;
-
-        const view = createMap(mapRef.current);
-        addRiverLayer(view.map);
-        addDamLayer(view.map);
-
         const fetchData = async () => {
             const countData = await getData(date);
             dispatch(setCount(countData));
@@ -61,27 +49,33 @@ const RiverMap = () => {
 
         fetchData();
 
+        if (allCounts.bon.length > 0) {
+            addSalmonDataLayer(view.map, allCounts, date);
+        }
+
         return () => {
             view.destroy();
         };
     }, [date]); // Add date as a dependency
 
-    useEffect(() => {
-        if (!mapRef?.current || !allCounts) return;
+    // useEffect(() => {
+    //     if (!mapRef?.current || !allCounts) return;
 
-        const view = createMap(mapRef.current);
-        addSalmonDataLayer(view.map, allCounts, date);
+    //     const view = createMap(mapRef.current);
+    //     addRiverLayer(view.map);
+    //     addSalmonDataLayer(view.map, allCounts, date);
+    //     addDamLayer(view.map);
 
-        return () => {
-            view.destroy();
-        };
-    }, [allCounts]); // Add allCounts as a dependency
+    //     return () => {
+    //         view.destroy();
+    //     };
+    // }, [allCounts]); 
 
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-green-600">
+        <div className="flex flex-col justify-center items-center h-screen bg-background bg-cover bg-center">
             <div className="h-[700px] w-full lg:w-5/6 bg-green-900" ref={mapRef}></div>
-            <div>
+            <div className="p-4">
                 <DateSelection />
             </div>
         </div>

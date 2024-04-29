@@ -1,6 +1,3 @@
-
-import DateSelection from "./components/DateSelection"
-
 import './App.css'
 import RiverMap from './components/RiverMap'
 
@@ -8,7 +5,9 @@ function App() {
 
   return (
     <>
-      <RiverMap />
+      <main className="bg-[./assets/images/background.png] h-screen">
+        <RiverMap />
+      </main>
     </>
   )
 }
