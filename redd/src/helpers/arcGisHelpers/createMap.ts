@@ -89,7 +89,7 @@ export const addRiverLayer = (map: Map) => {
     map.add(riverLayer)
 }
 
-export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: number) => {
+export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
     addBonToTdaData(map, allCounts.bon, date);
     addTdaToJdaData(map, allCounts.tda, date);
     addJdaToMcnData(map, allCounts.jda, date);

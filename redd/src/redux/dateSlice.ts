@@ -8,7 +8,7 @@ interface DateSelected {
 
 
 const initialState: DateSelected = {
-    date_selected: new Date().toISOString()
+    date_selected: "2023-07-06"
 }
 
 export const dateSlice = createSlice({
@@ -16,7 +16,8 @@ export const dateSlice = createSlice({
     initialState,
     reducers: {
         setDate: (state: DateSelected, action: PayloadAction<string>) => {
-            state.date_selected = action.payload;
+            const isoString = action.payload;
+            state.date_selected = isoString.substring(0, 10);
         }
     }
 })

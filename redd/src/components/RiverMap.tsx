@@ -4,32 +4,79 @@ import { getData } from "../helpers/dataHelpers/getData";
 import { useDispatch, useSelector } from "react-redux"
 import { selectDamCounts, setCount } from "../redux/damCountSlice"
 import DateSelection from "./DateSelection";
+import { selectDate } from "../redux/dateSlice";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
     const dispatch = useDispatch()
     const allCounts = useSelector(selectDamCounts)
+    const date = useSelector(selectDate)
+
+    // useEffect(() => {
+    //     if (!mapRef?.current) return;
+
+    //     const view = createMap(mapRef.current);
+    //     addRiverLayer(view.map);
+
+    //     const fetchData = async () => {
+    //         const countData = await getData(date);
+    //         dispatch(setCount(countData))
+    //         addSalmonDataLayer(view.map, allCounts, date)
+    //         console.log(allCounts)
+    //     }
+    //     fetchData();
+    //     console.log(allCounts)
+    //     // addSalmonDataLayer(view.map, allCounts, date)
+    //     addDamLayer(view.map);
+
+
+    //     return () => {
+    //         view.destroy()
+    //     }
+    // }, [])
 
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-
-        // const fetchData = async () => {
-        //     const countData = await getData();
-        //     dispatch(setCount(countData))
-        //     console.log(allCounts)
-        // }
-        // fetchData();
-        // addSalmonDataLayer(view.map, allCounts, 20)
         addDamLayer(view.map);
 
+        return () => {
+            view.destroy();
+        };
+    }, [])
+
+    useEffect(() => {
+        if (!mapRef?.current) return;
+
+        const view = createMap(mapRef.current);
+        addRiverLayer(view.map);
+        addDamLayer(view.map);
+
+        const fetchData = async () => {
+            const countData = await getData(date);
+            dispatch(setCount(countData));
+        };
+
+        fetchData();
 
         return () => {
-            view.destroy()
-        }
-    }, [])
+            view.destroy();
+        };
+    }, [date]); // Add date as a dependency
+
+    useEffect(() => {
+        if (!mapRef?.current || !allCounts) return;
+
+        const view = createMap(mapRef.current);
+        addSalmonDataLayer(view.map, allCounts, date);
+
+        return () => {
+            view.destroy();
+        };
+    }, [allCounts]); // Add allCounts as a dependency
+
 
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-green-600">

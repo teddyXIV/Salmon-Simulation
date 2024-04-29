@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const getData = async () => {
+export const getData = async (date: string) => {
 
 
     try {
