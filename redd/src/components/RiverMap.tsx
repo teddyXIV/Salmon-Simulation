@@ -14,16 +14,15 @@ const RiverMap = () => {
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-        addDamLayer(view.map);
 
-        const fetchData = async () => {
-            const countData = await getData();
-            dispatch(setCount(countData))
-            console.log(allCounts)
-            // addSalmonDataLayer(view.map, allCounts, 20)
-        }
-        fetchData();
-        addSalmonDataLayer(view.map, allCounts, 20)
+        // const fetchData = async () => {
+        //     const countData = await getData();
+        //     dispatch(setCount(countData))
+        //     console.log(allCounts)
+        // }
+        // fetchData();
+        // addSalmonDataLayer(view.map, allCounts, 20)
+        addDamLayer(view.map);
 
 
         return () => {
