@@ -3,6 +3,7 @@ import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer } from "../he
 import { getData } from "../helpers/dataHelpers/getData";
 import { useDispatch, useSelector } from "react-redux"
 import { selectDamCounts, setCount } from "../redux/damCountSlice"
+import DateSelection from "./DateSelection";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -31,8 +32,11 @@ const RiverMap = () => {
     }, [])
 
     return (
-        <div className="flex justify-center items-center h-screen bg-green-600">
+        <div className="flex flex-col justify-center items-center h-screen bg-green-600">
             <div className="h-[700px] w-full lg:w-5/6 bg-green-900" ref={mapRef}></div>
+            <div>
+                <DateSelection />
+            </div>
         </div>
     )
 }
