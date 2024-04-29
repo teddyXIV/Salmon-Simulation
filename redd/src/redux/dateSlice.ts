@@ -3,20 +3,20 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
 interface DateSelected {
-    date_selected: Date
+    date_selected: string
 }
 
 
 const initialState: DateSelected = {
-    date_selected: new Date()
+    date_selected: new Date().toISOString()
 }
 
 export const dateSlice = createSlice({
     name: 'date',
     initialState,
     reducers: {
-        setDate: (state: DateSelected, action: PayloadAction<Date>) => {
-            state.date_selected = action.payload
+        setDate: (state: DateSelected, action: PayloadAction<string>) => {
+            state.date_selected = action.payload;
         }
     }
 })
