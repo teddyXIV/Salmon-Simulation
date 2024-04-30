@@ -58,27 +58,14 @@ const RiverMap = () => {
         };
     }, [date]); // Add date as a dependency
 
-    // useEffect(() => {
-    //     if (!mapRef?.current || !allCounts) return;
-
-    //     const view = createMap(mapRef.current);
-    //     addRiverLayer(view.map);
-    //     addSalmonDataLayer(view.map, allCounts, date);
-    //     addDamLayer(view.map);
-
-    //     return () => {
-    //         view.destroy();
-    //     };
-    // }, [allCounts]); 
-
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-background bg-cover bg-center">
-            <div className="h-[700px] w-full lg:w-5/6 bg-green-900" ref={mapRef}></div>
+        <>
+            <div className="h-[700px] w-full lg:w-5/6 bg-green-900 border-neutral-600 border-8 rounded-lg" ref={mapRef}></div>
             <div className="p-4">
                 <DateSelection />
             </div>
-        </div>
+        </>
     )
 }
 

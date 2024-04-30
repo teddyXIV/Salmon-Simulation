@@ -5,12 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'background': "url('./src/assets/images/bg3.png')"
+      fontFamily: {
+        'sans': ['Krona One', 'sans-serif']
       },
-      backgroundColor: theme => ({
-        'overlay': 'rgba(0, 0, 0, 0.5)'
-      })
+      backgroundImage: {
+        'background': "url('./src/assets/images/bg4.png')"
+      }
     },
   },
   plugins: [],

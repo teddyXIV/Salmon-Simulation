@@ -1,13 +1,15 @@
 import './App.css'
+import Header from './components/Header'
 import RiverMap from './components/RiverMap'
 
 function App() {
 
   return (
     <>
-      <main className="bg-[./assets/images/background.png] h-screen">
+      <div className="flex flex-col justify-center items-center h-screen bg-background bg-cover bg-center">
+        <Header />
         <RiverMap />
-      </main>
+      </div>
     </>
   )
 }
