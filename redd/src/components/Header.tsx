@@ -1,18 +1,12 @@
 import DropdownMenu from "./DropdownMenu";
-
+import fishLadder from "../assets/icons/fish-ladder-full.svg"
 const Header = () => {
     return (
         <div className="flex flex-row font-sans text-white bg-black/60 w-screen h-fit absolute inset-x-0 top-0">
+            <img src={fishLadder} alt="Fish ladder icon" className="py-1 px-2" />
             <h1 className="text-3xl p-3 w-screen lg:w-2/3">Columbia River Salmon Passage</h1>
             <div className="flex break:hidden">
                 <DropdownMenu />
-                {/* <div className="px-5 py-2">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                    </button>
-                </div> */}
             </div>
 
             <div className="hidden break:flex flex-row w-1/3 justify-end">
