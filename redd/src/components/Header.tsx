@@ -2,9 +2,9 @@ const Header = () => {
     return (
         <div className="flex flex-row font-sans text-white bg-black/60 w-screen h-fit absolute inset-x-0 top-0">
             <h1 className="text-3xl p-3 w-screen lg:w-2/3">Columbia River Salmon Passage</h1>
-            <div className="hidden lg:flex flex-row w-1/3 text-center">
-                <div className="w-1/2" />
-                <button className="text-right my-auto w-1/4 mr-10 hover:text-green-500">
+            <div id="right" className="hidden lg:flex flex-row w-1/3 justify-end">
+                {/* <div className="w-1/4" /> */}
+                <button className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500">
                     <h3>About</h3>
                 </button>
                 <a href="https://www.cbr.washington.edu/dart/query/adult_daily" target="_blank" className="text-right my-auto w-1/4 mr-10 hover:text-green-500 flex flex-row">
