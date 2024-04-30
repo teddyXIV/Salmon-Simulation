@@ -9,7 +9,8 @@ import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
-import { addBonToTdaData, addJdaToMcnData, addMcnToPrdData, addPrdToWanData, addTdaToJdaData } from "./addSalmonData";
+import { addBonToTdaData, addJdaToMcnData, addMcnToPrdData, addPrdToWanData, addRisToRrhData, addRrhToWelData, addTdaToJdaData, addWanToRisData } from "./addSalmonData";
+import { DamCounts } from "../../types/damCountTypes";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({
@@ -19,8 +20,11 @@ export const createMap = (mapRef: HTMLDivElement) => {
     const newView = new MapView({
         map: map,
         container: mapRef,
-        center: [-121.35, 46.75],
-        scale: 2300000
+        center: [-121.25, 46.75],
+        scale: 2600000,
+        constraints: {
+            minScale: 4000000,
+        }
     });
 
     return newView
@@ -88,10 +92,13 @@ export const addRiverLayer = (map: Map) => {
     map.add(riverLayer)
 }
 
-export const addSalmonDataLayer = (map: Map, date: number) => {
-    addBonToTdaData(map, date);
-    addTdaToJdaData(map, date);
-    addJdaToMcnData(map, date);
-    addMcnToPrdData(map, date);
-    addPrdToWanData(map, date);
+export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
+    addBonToTdaData(map, allCounts.bon, date);
+    addTdaToJdaData(map, allCounts.tda, date);
+    addJdaToMcnData(map, allCounts.jda, date);
+    addMcnToPrdData(map, allCounts.mcn, date);
+    addPrdToWanData(map, allCounts.prd, date);
+    addWanToRisData(map, allCounts.wan, date);
+    addRisToRrhData(map, allCounts.ris, date);
+    addRrhToWelData(map, allCounts.rrh, date);
 }

@@ -1,7 +1,4 @@
-interface RiverPoints {
-    lat: number,
-    long: number
-}
+import { RiverPoints } from "../types/riverPointTypes"
 
 export const bonToTda: RiverPoints[] = [
     { lat: 45.673, long: -121.896 },

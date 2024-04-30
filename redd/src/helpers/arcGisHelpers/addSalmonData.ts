@@ -1,20 +1,20 @@
 import Map from "@arcgis/core/Map";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-// import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
-// import Graphic from "@arcgis/core/Graphic";
 import Point from "@arcgis/core/geometry/Point";
-// import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
-// import TextSymbol from "@arcgis/core/symbols/TextSymbol";
-import { bonToTda, tdaToJda, jdaToMcn, mcnToPrd, prdToWan } from "../../data/riverPointsData";
-import { testCounts } from "../../data/testData";
+import { bonToTda, tdaToJda, jdaToMcn, mcnToPrd, prdToWan, wanToRis, risToRrh, rrhToWel } from "../../data/riverPointsData";
+// import { testCounts } from "../../data/testData";
 import HeatmapRenderer from "@arcgis/core/renderers/HeatmapRenderer";
+import { SalmonCount } from "../../types/damCountTypes";
+import { RiverPoints } from "../../types/riverPointTypes";
 
-export const addBonToTdaData = (map: Map, date: number) => {
+export const addBonToTdaData = (map: Map, bonCount: SalmonCount[], date: string) => {
 
-    const bon = testCounts.allCounts.bon;
+    // const bon = testCounts.allCounts.bon;
 
-    const dayOfCount = bon[date].salmon_count;
-    const dayPriorCount = bon[date - 1].salmon_count;
+    const dateIndex = bonCount.findIndex(day => day.date === date);
+
+    const dayOfCount = bonCount[dateIndex].salmon_count;
+    const dayPriorCount = bonCount[dateIndex - 1].salmon_count;
 
     const segmentCounts = [
         Math.round(dayOfCount * 0.1),
@@ -32,49 +32,22 @@ export const addBonToTdaData = (map: Map, date: number) => {
         Math.round(dayPriorCount * 0.075)
     ];
 
-    const features = bonToTda.map((point, i) => {
-        const dataPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat,
-        });
-
-        return {
-            geometry: dataPoint,
-            attributes: {
-                OBJECTID: i,
-                salmonEst: segmentCounts[i]
-            }
-        };
-    });
+    const features = createFeatures(bonToTda, segmentCounts);
 
     const heatmapRenderer = createHeatmapRenderer();
 
-    const featureLayer = new FeatureLayer({
-        fields: [
-            {
-                name: "OBJECTID",
-                alias: "OBJECTID",
-                type: "oid"
-            },
-            {
-                name: "salmonEst",
-                alias: "Salmon Estimation",
-                type: "integer"
-            }
-        ],
-        objectIdField: "OBJECTID",
-        source: features,
-        renderer: heatmapRenderer
-    });
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
 }
 
-export const addTdaToJdaData = (map: Map, date: number) => {
+export const addTdaToJdaData = (map: Map, tdaCount: SalmonCount[], date: string) => {
 
-    const tda = testCounts.allCounts.tda;
+    // const tda = testCounts.allCounts.tda;
 
-    const dayOfCount = tda[date].salmon_count;
+    const dateIndex = tdaCount.findIndex(day => day.date === date);
+
+    const dayOfCount = tdaCount[dateIndex].salmon_count;
 
     const segmentCounts = [
         Math.round(dayOfCount * 0.075),
@@ -86,50 +59,23 @@ export const addTdaToJdaData = (map: Map, date: number) => {
         Math.round(dayOfCount * 0.075)
     ];
 
-    const features = tdaToJda.map((point, i) => {
-        const dataPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat,
-        });
-
-        return {
-            geometry: dataPoint,
-            attributes: {
-                OBJECTID: i,
-                salmonEst: segmentCounts[i]
-            }
-        };
-    });
+    const features = createFeatures(tdaToJda, segmentCounts);
 
     const heatmapRenderer = createHeatmapRenderer();
 
-    const featureLayer = new FeatureLayer({
-        fields: [
-            {
-                name: "OBJECTID",
-                alias: "OBJECTID",
-                type: "oid"
-            },
-            {
-                name: "salmonEst",
-                alias: "Salmon Estimation",
-                type: "integer"
-            }
-        ],
-        objectIdField: "OBJECTID",
-        source: features,
-        renderer: heatmapRenderer
-    });
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
 }
 
-export const addJdaToMcnData = (map: Map, date: number) => {
+export const addJdaToMcnData = (map: Map, jdaCount: SalmonCount[], date: string) => {
 
-    const jda = testCounts.allCounts.jda;
+    // const jda = testCounts.allCounts.jda;
 
-    const dayOfCount = jda[date].salmon_count;
-    const dayPriorCount = jda[date - 1].salmon_count
+    const dateIndex = jdaCount.findIndex(day => day.date === date);
+
+    const dayOfCount = jdaCount[dateIndex].salmon_count;
+    const dayPriorCount = jdaCount[dateIndex - 1].salmon_count
 
     const segmentCounts = [
         Math.round(dayOfCount * 0.04),
@@ -156,53 +102,26 @@ export const addJdaToMcnData = (map: Map, date: number) => {
         Math.round(dayPriorCount * 0.04)
     ];
 
-    const features = jdaToMcn.map((point, i) => {
-        const dataPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat,
-        });
-
-        return {
-            geometry: dataPoint,
-            attributes: {
-                OBJECTID: i,
-                salmonEst: segmentCounts[i]
-            }
-        };
-    });
+    const features = createFeatures(jdaToMcn, segmentCounts);
 
     const heatmapRenderer = createHeatmapRenderer();
 
-    const featureLayer = new FeatureLayer({
-        fields: [
-            {
-                name: "OBJECTID",
-                alias: "OBJECTID",
-                type: "oid"
-            },
-            {
-                name: "salmonEst",
-                alias: "Salmon Estimation",
-                type: "integer"
-            }
-        ],
-        objectIdField: "OBJECTID",
-        source: features,
-        renderer: heatmapRenderer
-    });
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
 }
 
-export const addMcnToPrdData = (map: Map, date: number) => {
+export const addMcnToPrdData = (map: Map, mcnCount: SalmonCount[], date: string) => {
 
-    const mcn = testCounts.allCounts.mcn;
+    // const mcn = testCounts.allCounts.mcn;
 
-    const dayOfCount = mcn[date].salmon_count;
-    const dayPriorCount = mcn[date - 1].salmon_count
-    const twoPriorCount = mcn[date - 2].salmon_count
-    const threePriorCount = mcn[date - 3].salmon_count
-    const fourPriorCount = mcn[date - 4].salmon_count
+    const dateIndex = mcnCount.findIndex(day => day.date === date);
+
+    const dayOfCount = mcnCount[dateIndex].salmon_count;
+    const dayPriorCount = mcnCount[dateIndex - 1].salmon_count
+    const twoPriorCount = mcnCount[dateIndex - 2].salmon_count
+    const threePriorCount = mcnCount[dateIndex - 3].salmon_count
+    const fourPriorCount = mcnCount[dateIndex - 4].salmon_count
 
     const segmentCounts = [
         Math.round(dayOfCount * 0.1),
@@ -238,49 +157,22 @@ export const addMcnToPrdData = (map: Map, date: number) => {
         Math.round(fourPriorCount * 0.075)
     ];
 
-    const features = mcnToPrd.map((point, i) => {
-        const dataPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat,
-        });
-
-        return {
-            geometry: dataPoint,
-            attributes: {
-                OBJECTID: i,
-                salmonEst: segmentCounts[i]
-            }
-        };
-    });
+    const features = createFeatures(mcnToPrd, segmentCounts);
 
     const heatmapRenderer = createHeatmapRenderer();
 
-    const featureLayer = new FeatureLayer({
-        fields: [
-            {
-                name: "OBJECTID",
-                alias: "OBJECTID",
-                type: "oid"
-            },
-            {
-                name: "salmonEst",
-                alias: "Salmon Estimation",
-                type: "integer"
-            }
-        ],
-        objectIdField: "OBJECTID",
-        source: features,
-        renderer: heatmapRenderer
-    });
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
 }
 
-export const addPrdToWanData = (map: Map, date: number) => {
+export const addPrdToWanData = (map: Map, prdCount: SalmonCount[], date: string) => {
 
-    const prd = testCounts.allCounts.prd;
+    // const prd = testCounts.allCounts.prd;
 
-    const dayOfCount = prd[date].salmon_count;
+    const dateIndex = prdCount.findIndex(day => day.date === date);
+
+    const dayOfCount = prdCount[dateIndex].salmon_count;
 
     const segmentCounts = [
         Math.round(dayOfCount * 0.13),
@@ -290,40 +182,102 @@ export const addPrdToWanData = (map: Map, date: number) => {
         Math.round(dayOfCount * 0.13)
     ];
 
-    const features = prdToWan.map((point, i) => {
-        const dataPoint = new Point({
-            longitude: point.long,
-            latitude: point.lat,
-        });
-
-        return {
-            geometry: dataPoint,
-            attributes: {
-                OBJECTID: i,
-                salmonEst: segmentCounts[i]
-            }
-        };
-    });
+    const features = createFeatures(prdToWan, segmentCounts);
 
     const heatmapRenderer = createHeatmapRenderer();
 
-    const featureLayer = new FeatureLayer({
-        fields: [
-            {
-                name: "OBJECTID",
-                alias: "OBJECTID",
-                type: "oid"
-            },
-            {
-                name: "salmonEst",
-                alias: "Salmon Estimation",
-                type: "integer"
-            }
-        ],
-        objectIdField: "OBJECTID",
-        source: features,
-        renderer: heatmapRenderer
-    });
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
+
+    map.add(featureLayer);
+}
+
+export const addWanToRisData = (map: Map, wanCount: SalmonCount[], date: string) => {
+
+    // const wan = testCounts.allCounts.wan;
+
+    const dateIndex = wanCount.findIndex(day => day.date === date);
+
+    const dayOfCount = wanCount[dateIndex].salmon_count;
+    const dayPriorCount = wanCount[dateIndex - 1].salmon_count;
+
+    const segmentCounts = [
+        Math.round(dayOfCount * 0.13),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.30),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.13),
+        Math.round(dayPriorCount * 0.1),
+        Math.round(dayPriorCount * 0.15),
+        Math.round(dayPriorCount * 0.25),
+        Math.round(dayPriorCount * 0.25),
+        Math.round(dayPriorCount * 0.15),
+        Math.round(dayPriorCount * 0.1)
+    ];
+
+    const features = createFeatures(wanToRis, segmentCounts);
+
+    const heatmapRenderer = createHeatmapRenderer();
+
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
+
+    map.add(featureLayer);
+}
+
+export const addRisToRrhData = (map: Map, risCount: SalmonCount[], date: string) => {
+
+    // const ris = testCounts.allCounts.ris;
+
+    const dateIndex = risCount.findIndex(day => day.date === date);
+
+    const dayOfCount = risCount[dateIndex].salmon_count;
+
+    const segmentCounts = [
+        Math.round(dayOfCount * 0.13),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.30),
+        Math.round(dayOfCount * 0.22),
+        Math.round(dayOfCount * 0.13)
+    ];
+
+    const features = createFeatures(risToRrh, segmentCounts);
+
+    const heatmapRenderer = createHeatmapRenderer();
+
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
+
+    map.add(featureLayer);
+}
+
+export const addRrhToWelData = (map: Map, rrhCount: SalmonCount[], date: string) => {
+
+    // const rrh = testCounts.allCounts.rrh;
+
+    const dateIndex = rrhCount.findIndex(day => day.date === date);
+
+    const dayOfCount = rrhCount[dateIndex].salmon_count;
+    const dayPriorCount = rrhCount[dateIndex - 1].salmon_count
+
+    const segmentCounts = [
+        Math.round(dayOfCount * 0.1),
+        Math.round(dayOfCount * 0.15),
+        Math.round(dayOfCount * 0.25),
+        Math.round(dayOfCount * 0.25),
+        Math.round(dayOfCount * 0.15),
+        Math.round(dayOfCount * 0.1),
+        Math.round(dayPriorCount * 0.075),
+        Math.round(dayPriorCount * 0.1),
+        Math.round(dayPriorCount * 0.15),
+        Math.round(dayPriorCount * 0.3),
+        Math.round(dayPriorCount * 0.15),
+        Math.round(dayPriorCount * 0.1),
+        Math.round(dayPriorCount * 0.075)
+    ];
+
+    const features = createFeatures(rrhToWel, segmentCounts);
+
+    const heatmapRenderer = createHeatmapRenderer();
+
+    const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
 }
@@ -347,4 +301,43 @@ const createHeatmapRenderer = () => {
         ]
 
     })
+}
+
+const createFeatures = (riverSegment: RiverPoints[], segmentCounts: number[]) => {
+    return riverSegment.map((point, i) => {
+        const dataPoint = new Point({
+            longitude: point.long,
+            latitude: point.lat,
+        });
+
+        return {
+            geometry: dataPoint,
+            attributes: {
+                OBJECTID: i,
+                salmonEst: segmentCounts[i]
+            }
+        }
+    });
+}
+
+const createFeatureLayer = (features: any, heatmapRenderer: any) => {
+    const featureLayer = new FeatureLayer({
+        fields: [
+            {
+                name: "OBJECTID",
+                alias: "OBJECTID",
+                type: "oid"
+            },
+            {
+                name: "salmonEst",
+                alias: "Salmon Estimation",
+                type: "integer"
+            }
+        ],
+        objectIdField: "OBJECTID",
+        source: features,
+        renderer: heatmapRenderer
+    });
+
+    return featureLayer;
 }

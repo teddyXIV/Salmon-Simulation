@@ -4,7 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Krona One', 'sans-serif']
+      },
+      backgroundImage: {
+        'background': "url('./src/assets/images/bg4.png')"
+      }
+    },
   },
   plugins: [],
 }
