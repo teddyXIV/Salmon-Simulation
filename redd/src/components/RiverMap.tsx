@@ -12,28 +12,28 @@ const RiverMap = () => {
     const allCounts = useSelector(selectDamCounts)
     const date = useSelector(selectDate)
 
-    // useEffect(() => {
-    //     if (!mapRef?.current) return;
+    useEffect(() => {
+        if (!mapRef?.current) return;
 
-    //     const view = createMap(mapRef.current);
-    //     addRiverLayer(view.map);
+        const view = createMap(mapRef.current);
+        addRiverLayer(view.map);
 
-    //     const fetchData = async () => {
-    //         const countData = await getData(date);
-    //         dispatch(setCount(countData))
-    //         addSalmonDataLayer(view.map, allCounts, date)
-    //         console.log(allCounts)
-    //     }
-    //     fetchData();
-    //     console.log(allCounts)
-    //     // addSalmonDataLayer(view.map, allCounts, date)
-    //     addDamLayer(view.map);
+        // const fetchData = async () => {
+        //     const countData = await getData(date);
+        //     dispatch(setCount(countData))
+        //     addSalmonDataLayer(view.map, allCounts, date)
+        //     console.log(allCounts)
+        // }
+        // fetchData();
+        // console.log(allCounts)
+        // addSalmonDataLayer(view.map, allCounts, date)
+        addDamLayer(view.map);
 
 
-    //     return () => {
-    //         view.destroy()
-    //     }
-    // }, [])
+        return () => {
+            view.destroy()
+        }
+    }, [])
 
     useEffect(() => {
         if (!mapRef?.current) return;
@@ -42,16 +42,16 @@ const RiverMap = () => {
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
-        // const fetchData = async () => {
-        //     const countData = await getData(date);
-        //     dispatch(setCount(countData));
-        // };
+        const fetchData = async () => {
+            const countData = await getData(date);
+            dispatch(setCount(countData));
+        };
 
-        // fetchData();
+        fetchData();
 
-        // if (allCounts.bon.length > 0) {
-        //     addSalmonDataLayer(view.map, allCounts, date);
-        // }
+        if (allCounts.bon.length > 0) {
+            addSalmonDataLayer(view.map, allCounts, date);
+        }
 
         return () => {
             view.destroy();
@@ -60,13 +60,14 @@ const RiverMap = () => {
 
 
     return (
-
-        <div className="flex flex-col items-center h-screen">
-            <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-lg" ref={mapRef}></div>
-            <div className="p-2">
-                <DateSelection />
+        <>
+            <div className="flex flex-col items-center h-full">
+                <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-sm" ref={mapRef}></div>
+                <div className="p-2">
+                    <DateSelection />
+                </div>
             </div>
-        </div>
+        </>
 
     )
 }

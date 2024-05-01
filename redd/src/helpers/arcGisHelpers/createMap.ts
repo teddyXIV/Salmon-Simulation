@@ -31,7 +31,13 @@ export const createMap = (mapRef: HTMLDivElement) => {
 }
 
 export const addDamLayer = (map: Map) => {
-    const graphicsLayer = new GraphicsLayer();
+    const graphicsLayer = new GraphicsLayer({
+        elevationInfo: {
+            mode: "relative-to-scene",
+            offset: 1000
+
+        }
+    });
 
     damData.forEach(dam => {
         const point = new Point({
