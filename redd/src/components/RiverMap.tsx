@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer } from "../helpers/arcGisHelpers/createMap"
 import { getData } from "../helpers/dataHelpers/getData";
 import { useDispatch, useSelector } from "react-redux"
 import { selectDamCounts, setCount } from "../redux/damCountSlice"
 import DateSelection from "./DateSelection";
 import { selectDate } from "../redux/dateSlice";
+import DateError from "./DateError";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -12,6 +13,7 @@ const RiverMap = () => {
     const allCounts = useSelector(selectDamCounts)
     const date = useSelector(selectDate)
     const dataFetchedRef = useRef(false);
+    const [error, setError] = useState<string>("block")
 
     useEffect(() => {
         if (!mapRef?.current) return;
@@ -30,9 +32,13 @@ const RiverMap = () => {
 
         const fetchData = async () => {
             const countData = await getData(date);
-            dispatch(setCount(countData));
-            dataFetchedRef.current = !dataFetchedRef.current;
-            console.log(dataFetchedRef.current)
+            if (typeof (countData) !== "string") {
+                setError("hidden");
+                dispatch(setCount(countData));
+                dataFetchedRef.current = !dataFetchedRef.current;
+            } else {
+                setError("block")
+            }
         };
 
         fetchData();
@@ -43,7 +49,6 @@ const RiverMap = () => {
         if (!mapRef?.current || !date) return;
 
         if (allCounts.bon.length > 0) {
-            console.log("bon.length is greater than 0")
             const view = createMap(mapRef.current);
             addSalmonDataLayer(view.map, allCounts, date);
             addDamLayer(view.map);
@@ -61,6 +66,9 @@ const RiverMap = () => {
                 <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-sm" ref={mapRef}></div>
                 <div className="p-2">
                     <DateSelection />
+                </div>
+                <div className={error}>
+                    <DateError />
                 </div>
             </div>
         </>
