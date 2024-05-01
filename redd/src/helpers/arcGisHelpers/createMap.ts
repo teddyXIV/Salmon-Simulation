@@ -45,7 +45,7 @@ export const addDamLayer = (map: Map) => {
         })
 
         const marker = new SimpleMarkerSymbol({
-            color: "green",
+            color: [175, 252, 65],
         })
 
         const label = new TextSymbol({

@@ -10,6 +10,10 @@ module.exports = {
       },
       backgroundImage: {
         'background': "url('./src/assets/images/bg4.png')"
+      },
+      screens: {
+        'break': '954px',
+        'header-break': '807px'
       }
     },
   },

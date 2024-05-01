@@ -8,7 +8,7 @@ interface DateSelected {
 
 
 const initialState: DateSelected = {
-    date_selected: "2023-07-06"
+    date_selected: ""
 }
 
 export const dateSlice = createSlice({

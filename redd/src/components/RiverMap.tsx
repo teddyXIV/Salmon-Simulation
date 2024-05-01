@@ -11,29 +11,7 @@ const RiverMap = () => {
     const dispatch = useDispatch()
     const allCounts = useSelector(selectDamCounts)
     const date = useSelector(selectDate)
-
-    // useEffect(() => {
-    //     if (!mapRef?.current) return;
-
-    //     const view = createMap(mapRef.current);
-    //     addRiverLayer(view.map);
-
-    //     const fetchData = async () => {
-    //         const countData = await getData(date);
-    //         dispatch(setCount(countData))
-    //         addSalmonDataLayer(view.map, allCounts, date)
-    //         console.log(allCounts)
-    //     }
-    //     fetchData();
-    //     console.log(allCounts)
-    //     // addSalmonDataLayer(view.map, allCounts, date)
-    //     addDamLayer(view.map);
-
-
-    //     return () => {
-    //         view.destroy()
-    //     }
-    // }, [])
+    const dataFetchedRef = useRef(false);
 
     useEffect(() => {
         if (!mapRef?.current) return;
@@ -42,28 +20,48 @@ const RiverMap = () => {
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
+        return () => {
+            view.destroy()
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!mapRef?.current || !date) return;
+
         const fetchData = async () => {
             const countData = await getData(date);
             dispatch(setCount(countData));
+            dataFetchedRef.current = !dataFetchedRef.current;
+            console.log(dataFetchedRef.current)
         };
 
         fetchData();
 
+    }, [date]);
+
+    useEffect(() => {
+        if (!mapRef?.current || !date) return;
+
         if (allCounts.bon.length > 0) {
+            console.log("bon.length is greater than 0")
+            const view = createMap(mapRef.current);
             addSalmonDataLayer(view.map, allCounts, date);
+            addDamLayer(view.map);
+
+            return () => {
+                view.destroy();
+            };
         }
 
-        return () => {
-            view.destroy();
-        };
-    }, [date]); // Add date as a dependency
-
+    }, [dataFetchedRef.current])
 
     return (
         <>
-            <div className="h-[700px] w-full lg:w-5/6 bg-green-900 border-neutral-600 border-8 rounded-lg" ref={mapRef}></div>
-            <div className="p-4">
-                <DateSelection />
+            <div className="flex flex-col items-center h-full">
+                <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-sm" ref={mapRef}></div>
+                <div className="p-2">
+                    <DateSelection />
+                </div>
             </div>
         </>
     )
