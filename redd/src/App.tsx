@@ -7,8 +7,12 @@ function App() {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen bg-background bg-cover bg-center">
-        <Header />
-        <RiverMap />
+        <div className="h-fit">
+          <Header />
+        </div>
+        <div className="h-5/6 w-screen sm:w-5/6">
+          <RiverMap />
+        </div>
       </div>
     </>
   )

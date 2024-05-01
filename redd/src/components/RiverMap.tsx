@@ -42,16 +42,16 @@ const RiverMap = () => {
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
-        const fetchData = async () => {
-            const countData = await getData(date);
-            dispatch(setCount(countData));
-        };
+        // const fetchData = async () => {
+        //     const countData = await getData(date);
+        //     dispatch(setCount(countData));
+        // };
 
-        fetchData();
+        // fetchData();
 
-        if (allCounts.bon.length > 0) {
-            addSalmonDataLayer(view.map, allCounts, date);
-        }
+        // if (allCounts.bon.length > 0) {
+        //     addSalmonDataLayer(view.map, allCounts, date);
+        // }
 
         return () => {
             view.destroy();
@@ -60,12 +60,14 @@ const RiverMap = () => {
 
 
     return (
-        <>
-            <div className="h-[700px] w-full lg:w-5/6 bg-green-900 border-neutral-600 border-8 rounded-lg" ref={mapRef}></div>
-            <div className="p-4">
+
+        <div className="flex flex-col items-center h-screen">
+            <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-lg" ref={mapRef}></div>
+            <div className="p-2">
                 <DateSelection />
             </div>
-        </>
+        </div>
+
     )
 }
 
