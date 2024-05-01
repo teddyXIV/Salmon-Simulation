@@ -51,6 +51,8 @@ export const addDamLayer = (map: Map) => {
         const label = new TextSymbol({
             text: dam.name,
             color: "black",
+            haloColor: "white",
+            haloSize: "1px",
             font: {
                 size: 12,
             }

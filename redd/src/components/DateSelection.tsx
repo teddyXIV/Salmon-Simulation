@@ -7,6 +7,8 @@ const DateSelection = () => {
     const dispatch = useDispatch();
     const [newDate, setNewDate] = useState<string>("")
 
+    const today = new Date().toISOString().slice(0, 10);
+
     return (
         <>
 
@@ -18,6 +20,8 @@ const DateSelection = () => {
                     <input type="date"
                         id="date-select"
                         className="mx-2 h-10 rounded-md p-2"
+                        min="2023-01-01"
+                        max={today}
                         onChange={e => {
                             setNewDate(e.target.value)
                         }} />
