@@ -36,11 +36,10 @@ const RiverMap = () => {
     }, [])
 
     useEffect(() => {
-        if (!mapRef?.current) return;
+        if (!mapRef?.current || !date) return;
 
         const view = createMap(mapRef.current);
         addRiverLayer(view.map);
-        addDamLayer(view.map);
 
         const fetchData = async () => {
             const countData = await getData(date);
@@ -50,7 +49,9 @@ const RiverMap = () => {
         fetchData();
 
         if (allCounts.bon.length > 0) {
+            console.log("bon.length is greater than 0")
             addSalmonDataLayer(view.map, allCounts, date);
+            addDamLayer(view.map);
         }
 
         return () => {

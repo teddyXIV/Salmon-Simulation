@@ -31,13 +31,7 @@ export const createMap = (mapRef: HTMLDivElement) => {
 }
 
 export const addDamLayer = (map: Map) => {
-    const graphicsLayer = new GraphicsLayer({
-        elevationInfo: {
-            mode: "relative-to-scene",
-            offset: 1000
-
-        }
-    });
+    const graphicsLayer = new GraphicsLayer();
 
     damData.forEach(dam => {
         const point = new Point({
@@ -51,7 +45,7 @@ export const addDamLayer = (map: Map) => {
         })
 
         const marker = new SimpleMarkerSymbol({
-            color: "green",
+            color: [175, 252, 65],
         })
 
         const label = new TextSymbol({
