@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setVisiblity } from "../redux/modalVisibleSlice";
 
 const DropdownMenu = () => {
     const [menu, setMenu] = useState<Boolean>(false);
+    const dispatch = useDispatch()
 
     const toggleDropdown = () => {
         setMenu(!menu);
+    }
+
+    const openAbout = () => {
+        dispatch(setVisiblity(true));
+        setMenu(!menu)
     }
 
     return (
@@ -30,7 +38,7 @@ const DropdownMenu = () => {
                     <div
                         className="py-2"
                         role="none">
-                        <button className="hover:text-green-500 mx-10 mb-2">
+                        <button onClick={() => openAbout()} className="hover:text-green-500 mx-10 mb-2">
                             <h3>About</h3>
                         </button>
                         <hr className="mx-4 mb-2" />

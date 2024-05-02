@@ -1,9 +1,11 @@
-import './App.css'
-import DateSelection from './components/DateSelection'
+import About from './components/About';
 import Header from './components/Header'
 import RiverMap from './components/RiverMap'
+import { useSelector } from 'react-redux'
+import { selectModalVisibility } from './redux/modalVisibleSlice';
 
 function App() {
+  const modalVisible = useSelector(selectModalVisibility)
 
   return (
     <>
@@ -15,6 +17,7 @@ function App() {
           <RiverMap />
         </div>
       </div>
+      {modalVisible && <About />}
     </>
   )
 }
