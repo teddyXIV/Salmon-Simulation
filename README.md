@@ -24,4 +24,6 @@ This application allows the user to enter a date and view an estimate of Chinook
 
 * Segments of the river can be missing data for some dates when data is not available from the Columbia River Dart Program. 
 
-## License
+## License   
+
+[MIT License](./LICENSE)
