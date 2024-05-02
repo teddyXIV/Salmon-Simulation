@@ -3,8 +3,10 @@
 @import 'tailwindcss/utilities';
 
 @import "@arcgis/core/assets/esri/themes/dark/main.css";
-@import 'react-date-picker/dist/DatePicker.css';
-@import 'react-calendar/dist/Calendar.css';
+
+.esri-ui-top-left {
+  top: 100px;
+}
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

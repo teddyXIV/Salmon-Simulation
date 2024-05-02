@@ -9,17 +9,16 @@ export const getData = async (date: string) => {
 
         const startDate = new Date(currentDate.getTime() - 5 * 24 * 60 * 60 * 1000);
         const startDateString = startDate.toISOString().slice(0, 10);
-        console.log(startDateString);
-        console.log(date)
 
         const dates = {
             startDate: startDateString,
             endDate: date
         }
         const res = await axios.get("http://127.0.0.1:8000/", { params: dates })
-        console.log("data fetched")
         return res.data
     } catch (error) {
         console.log("Error fetching user data", error)
+
+        return "No data"
     }
 }

@@ -20,7 +20,7 @@ export const createMap = (mapRef: HTMLDivElement) => {
     const newView = new MapView({
         map: map,
         container: mapRef,
-        center: [-121.25, 46.75],
+        center: [-121.134, 45.614],
         scale: 2600000,
         constraints: {
             minScale: 4000000,
@@ -51,6 +51,8 @@ export const addDamLayer = (map: Map) => {
         const label = new TextSymbol({
             text: dam.name,
             color: "black",
+            haloColor: "white",
+            haloSize: "1px",
             font: {
                 size: 12,
             }

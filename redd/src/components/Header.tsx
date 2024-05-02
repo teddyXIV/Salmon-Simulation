@@ -2,7 +2,7 @@ import DropdownMenu from "./DropdownMenu";
 import fishLadder from "../assets/icons/fish-ladder-full.svg"
 const Header = () => {
     return (
-        <div className="flex flex-row font-sans text-white bg-black/60 w-screen h-fit absolute inset-x-0 top-0">
+        <div className="flex flex-row font-sans text-white bg-black/85 w-screen h-16 absolute inset-x-0 top-0">
             <img src={fishLadder} alt="Fish ladder icon" className="py-1 px-2" />
             <h1 className="hidden header-break:block text-3xl p-3 w-screen">Columbia River Salmon Passage</h1>
             <div className="header-break:hidden w-5/6" />

@@ -22,7 +22,7 @@ const DropdownMenu = () => {
                     </button>
                 </div>
                 <div
-                    className={`${menu ? 'block' : 'hidden'} origin-top-right absolute right-0 mt-1.5 w-40 rounded-b-md shadow-lg bg-black/80 ring-1 ring-black ring-opacity-5 z-10`}
+                    className={`${menu ? 'block' : 'hidden'} origin-top-right absolute right-0 mt-[10px] w-40 rounded-b-md bg-black/85 z-20`}
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
