@@ -1,6 +1,11 @@
 import DropdownMenu from "./DropdownMenu";
 import fishLadder from "../assets/icons/fish-ladder-full.svg"
-const Header = (props: ModalControl) => {
+import { useDispatch } from "react-redux"
+import { setVisiblity } from "../redux/modalVisibleSlice";
+
+const Header = () => {
+    const dispatch = useDispatch();
+
     return (
         <div className="flex flex-row font-sans text-white bg-black/85 w-screen h-16 absolute inset-x-0 top-0">
             <img src={fishLadder} alt="Fish ladder icon" className="py-1 px-2" />
@@ -10,7 +15,7 @@ const Header = (props: ModalControl) => {
                 <DropdownMenu />
             </div>
             <div className="hidden break:flex flex-row w-1/3 justify-end">
-                <button onClick={props.openHandler} className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500">
+                <button onClick={() => dispatch(setVisiblity(true))} className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500">
                     <h3>About</h3>
                 </button>
                 <a href="https://www.cbr.washington.edu/dart/query/adult_daily" target="_blank" className="text-right my-auto mr-10 hover:text-green-500 flex flex-row">
@@ -26,6 +31,3 @@ const Header = (props: ModalControl) => {
 
 export default Header;
 
-interface ModalControl {
-    openHandler: () => void
-}
