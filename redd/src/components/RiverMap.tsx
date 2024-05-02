@@ -64,7 +64,7 @@ const RiverMap = () => {
         <div className="relative h-full w-full bg-green-900">
             <div className="absolute inset-0 flex flex-col items-center">
                 <div className="block h-full w-full bg-green-900 relative" ref={mapRef}></div>
-                <div className="absolute bottom-4 z-10 bg-black/85 h-20 w-full rounded-t-lg justify-center items-center py-5">
+                <div className="absolute bottom-4 sm:bottom-16 sm:right-10 z-10 bg-black/85 h-fit w-full sm:w-96 sm:rounded-lg justify-center items-center py-5">
                     <div className={errorVisible}>
                         <DateError />
                     </div>

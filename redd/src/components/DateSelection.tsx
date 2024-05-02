@@ -24,7 +24,7 @@ const DateSelection = () => {
                     onChange={e => {
                         setNewDate(e.target.value)
                     }} />
-                <button type="submit" className="bg-white rounded-md border-black p-2 hover:bg-black hover:text-white">View salmon passage</button>
+                <button type="submit" className="bg-white mx-2 rounded-md border-black p-2 hover:bg-black hover:text-white">View salmon passage</button>
             </div>
         </form>
 
