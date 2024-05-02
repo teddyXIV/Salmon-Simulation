@@ -18,7 +18,7 @@ const DropdownMenu = () => {
     return (
         <>
             <div className="relative">
-                <div className="px-5 py-2">
+                <div className="px-5 py-3">
                     <button
                         onClick={toggleDropdown}
                         type="button"
@@ -30,7 +30,7 @@ const DropdownMenu = () => {
                     </button>
                 </div>
                 <div
-                    className={`${menu ? 'block' : 'hidden'} origin-top-right absolute right-0 mt-[10px] w-40 rounded-b-md bg-black/85 z-20`}
+                    className={`${menu ? 'block' : 'hidden'} origin-top-right absolute right-0 mt-[2px] w-40 rounded-bl-md bg-black/85 z-20`}
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
