@@ -1,5 +1,5 @@
-import Header from './components/Header'
-import RiverMap from './components/RiverMap'
+import Header from '../components/Header'
+import RiverMap from '../components/RiverMap'
 
 function App() {
 
