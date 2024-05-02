@@ -9,7 +9,7 @@ import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
-import { addBonToTdaData, addJdaToMcnData, addMcnToPrdData, addPrdToWanData, addRisToRrhData, addRrhToWelData, addTdaToJdaData, addWanToRisData } from "./addSalmonData";
+import { addAllData } from "./addSalmonData";
 import { DamCounts } from "../../types/damCountTypes";
 
 export const createMap = (mapRef: HTMLDivElement) => {
@@ -95,12 +95,13 @@ export const addRiverLayer = (map: Map) => {
 }
 
 export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
-    addBonToTdaData(map, allCounts.bon, date);
-    addTdaToJdaData(map, allCounts.tda, date);
-    addJdaToMcnData(map, allCounts.jda, date);
-    addMcnToPrdData(map, allCounts.mcn, date);
-    addPrdToWanData(map, allCounts.prd, date);
-    addWanToRisData(map, allCounts.wan, date);
-    addRisToRrhData(map, allCounts.ris, date);
-    addRrhToWelData(map, allCounts.rrh, date);
+    addAllData(map, allCounts, date)
+    // addBonToTdaData(map, allCounts.bon, date);
+    // addTdaToJdaData(map, allCounts.tda, date);
+    // addJdaToMcnData(map, allCounts.jda, date);
+    // addMcnToPrdData(map, allCounts.mcn, date);
+    // addPrdToWanData(map, allCounts.prd, date);
+    // addWanToRisData(map, allCounts.wan, date);
+    // addRisToRrhData(map, allCounts.ris, date);
+    // addRrhToWelData(map, allCounts.rrh, date);
 }

@@ -12,8 +12,8 @@ module.exports = {
         'background': "url('./src/assets/images/bg4.png')"
       },
       screens: {
-        'break': '960px',
-        'header-break': '810px'
+        'break': '967px',
+        'header-break': '815px'
       }
     },
   },
