@@ -1,5 +1,3 @@
-import './App.css'
-import DateSelection from './components/DateSelection'
 import Header from './components/Header'
 import RiverMap from './components/RiverMap'
 
