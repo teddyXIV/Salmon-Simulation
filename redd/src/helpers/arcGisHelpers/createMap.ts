@@ -96,12 +96,4 @@ export const addRiverLayer = (map: Map) => {
 
 export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
     addAllData(map, allCounts, date)
-    // addBonToTdaData(map, allCounts.bon, date);
-    // addTdaToJdaData(map, allCounts.tda, date);
-    // addJdaToMcnData(map, allCounts.jda, date);
-    // addMcnToPrdData(map, allCounts.mcn, date);
-    // addPrdToWanData(map, allCounts.prd, date);
-    // addWanToRisData(map, allCounts.wan, date);
-    // addRisToRrhData(map, allCounts.ris, date);
-    // addRrhToWelData(map, allCounts.rrh, date);
 }
