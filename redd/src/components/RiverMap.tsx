@@ -13,7 +13,7 @@ const RiverMap = () => {
     const allCounts = useSelector(selectDamCounts)
     const date = useSelector(selectDate)
     const dataFetchedRef = useRef(false);
-    const [error, setError] = useState<string>("block")
+    const [errorVisible, setErrorVisible] = useState<string>("hidden")
 
     useEffect(() => {
         if (!mapRef?.current) return;
@@ -33,11 +33,11 @@ const RiverMap = () => {
         const fetchData = async () => {
             const countData = await getData(date);
             if (typeof (countData) !== "string") {
-                setError("hidden");
+                setErrorVisible("hidden");
                 dispatch(setCount(countData));
                 dataFetchedRef.current = !dataFetchedRef.current;
             } else {
-                setError("block")
+                setErrorVisible("block")
             }
         };
 
@@ -61,18 +61,19 @@ const RiverMap = () => {
     }, [dataFetchedRef.current])
 
     return (
-        <>
-            <div className="flex flex-col items-center h-full">
-                <div className="block h-5/6 w-full bg-green-900 border-neutral-600 border-4 rounded-sm" ref={mapRef}></div>
-                <div className="p-2">
+        <div className="relative h-full w-full bg-green-900">
+            <div className="absolute inset-0 flex flex-col items-center">
+                <div className="block h-full w-full bg-green-900 relative" ref={mapRef}></div>
+                <div className="absolute bottom-4 z-10 bg-black/85 h-20 w-full rounded-t-lg justify-center items-center py-5">
+                    <div className={errorVisible}>
+                        <DateError />
+                    </div>
                     <DateSelection />
                 </div>
-                <div className={error}>
-                    <DateError />
-                </div>
             </div>
-        </>
+        </div>
     )
 }
 
 export default RiverMap;
+
