@@ -1,7 +1,6 @@
 import DropdownMenu from "./DropdownMenu";
-import { Link } from 'react-router-dom';
 import fishLadder from "../assets/icons/fish-ladder-full.svg"
-const Header = () => {
+const Header = (props: ModalControl) => {
     return (
         <div className="flex flex-row font-sans text-white bg-black/85 w-screen h-16 absolute inset-x-0 top-0">
             <img src={fishLadder} alt="Fish ladder icon" className="py-1 px-2" />
@@ -10,13 +9,10 @@ const Header = () => {
             <div className="flex break:hidden">
                 <DropdownMenu />
             </div>
-
             <div className="hidden break:flex flex-row w-1/3 justify-end">
-                {/* <button className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500"> */}
-                <Link to="/about" className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500">
-                    About
-                </Link>
-                {/* </button> */}
+                <button onClick={props.openHandler} className="place-content-end my-auto w-1/4 mr-10 hover:text-green-500">
+                    <h3>About</h3>
+                </button>
                 <a href="https://www.cbr.washington.edu/dart/query/adult_daily" target="_blank" className="text-right my-auto mr-10 hover:text-green-500 flex flex-row">
                     <h3>Data</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-1">
@@ -29,3 +25,7 @@ const Header = () => {
 }
 
 export default Header;
+
+interface ModalControl {
+    openHandler: () => void
+}
