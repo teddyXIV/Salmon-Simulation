@@ -6,6 +6,7 @@ import { selectDamCounts, setCount } from "../redux/damCountSlice"
 import DateSelection from "./DateSelection";
 import { selectDate } from "../redux/dateSlice";
 import DateError from "./DateError";
+import DateNav from "./DateNav";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -69,6 +70,7 @@ const RiverMap = () => {
                         <DateError />
                     </div>
                     <DateSelection />
+                    {date ? <DateNav/> : null}
                 </div>
             </div>
         </div>
