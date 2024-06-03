@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
-import { setDate } from "../redux/dateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { changeDate, selectDate } from "../redux/dateSlice";
 import { useState } from "react";
 
 
 const DateSelection = () => {
     const dispatch = useDispatch();
+    const date = useSelector(selectDate);
     const [newDate, setNewDate] = useState<string>("")
 
     const today = new Date().toISOString().slice(0, 10);
@@ -13,7 +14,7 @@ const DateSelection = () => {
 
         <form onSubmit={(e) => {
             e.preventDefault();
-            dispatch(setDate(newDate))
+            dispatch(changeDate(newDate))
         }}>
             <div className="flex flex-row justify-center items-center">
                 <input type="date"
@@ -23,7 +24,8 @@ const DateSelection = () => {
                     max={today}
                     onChange={e => {
                         setNewDate(e.target.value)
-                    }} />
+                    }} 
+                    value={date}/>
                 <button type="submit" className="bg-white mx-2 rounded-md border-black p-2 hover:bg-black hover:text-white">View salmon passage</button>
             </div>
         </form>
