@@ -20,7 +20,7 @@ export const createMap = (mapRef: HTMLDivElement) => {
     const newView = new MapView({
         map: map,
         container: mapRef,
-        center: [-121.134, 45.614],
+        center: [-121.134, 46.5],
         scale: 2600000,
         constraints: {
             minScale: 4000000,
@@ -45,7 +45,13 @@ export const addDamLayer = (map: Map) => {
         })
 
         const marker = new SimpleMarkerSymbol({
-            color: [175, 252, 65],
+            // color: [175, 252, 65],
+            color: [16,57,0],
+            outline: {
+                color: [255,255,255],
+                width: "2px"
+            }
+            
         })
 
         const label = new TextSymbol({

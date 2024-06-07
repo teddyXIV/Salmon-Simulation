@@ -15,11 +15,13 @@ const RiverMap = () => {
     const date = useSelector(selectDate)
     const dataFetchedRef = useRef(false);
     const [errorVisible, setErrorVisible] = useState<string>("hidden")
+    const [map, setMap] = useState<any>(null)
 
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
+        setMap(view)
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
@@ -50,13 +52,13 @@ const RiverMap = () => {
         if (!mapRef?.current || !date) return;
 
         if (allCounts.bon.length > 0) {
-            const view = createMap(mapRef.current);
-            addSalmonDataLayer(view.map, allCounts, date);
-            addDamLayer(view.map);
+            // const view = createMap(mapRef.current);
+            addSalmonDataLayer(map.map, allCounts, date);
+            // addDamLayer(view.map);
 
-            return () => {
-                view.destroy();
-            };
+            // return () => {
+            //     map.destroy();
+            // };
         }
 
     }, [dataFetchedRef.current])
