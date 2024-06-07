@@ -152,6 +152,8 @@ export const addAllData = (map: Map, allCounts: DamCounts, date: string) => {
     const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
     map.add(featureLayer);
+    
+    return featureLayer.fields[0].name;
 }
 
 const createHeatmapRenderer = () => {

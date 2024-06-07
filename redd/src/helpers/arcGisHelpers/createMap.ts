@@ -101,5 +101,15 @@ export const addRiverLayer = (map: Map) => {
 }
 
 export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
-    addAllData(map, allCounts, date)
+    return addAllData(map, allCounts, date)
+    
+}
+
+export const removeSalmonDataLayer = (map: any, layerId: string) => {
+    const layer = map.findLayerById(layerId);
+    if (layer) {
+        map.removeLayer(layer)
+    } else {
+        console.warn(`Layer with ID ${layerId} not found`);
+    }
 }

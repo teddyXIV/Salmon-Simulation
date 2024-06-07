@@ -32,7 +32,7 @@ const DateSelection = () => {
             
         </form>
         <div>
-        <DateNav newDate={newDate} setNewDate={setNewDate} />
+        {date? <DateNav newDate={newDate} setNewDate={setNewDate}/> : null}
         </div>
     </>
 
