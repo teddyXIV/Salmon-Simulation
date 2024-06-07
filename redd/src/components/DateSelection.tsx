@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, selectDate } from "../redux/dateSlice";
 import { useState } from "react";
+import DateNav from "./DateNav";
 
 
 const DateSelection = () => {
@@ -11,7 +12,7 @@ const DateSelection = () => {
     const today = new Date().toISOString().slice(0, 10);
 
     return (
-
+        <>
         <form onSubmit={(e) => {
             e.preventDefault();
             dispatch(changeDate(newDate))
@@ -25,10 +26,15 @@ const DateSelection = () => {
                     onChange={e => {
                         setNewDate(e.target.value)
                     }} 
-                    value={date}/>
+                    value={newDate? newDate : date}/>
                 <button type="submit" className="bg-white mx-2 rounded-md border-black p-2 hover:bg-black hover:text-white">View salmon passage</button>
             </div>
+            
         </form>
+        <div>
+        <DateNav newDate={newDate} setNewDate={setNewDate} />
+        </div>
+    </>
 
     );
 };

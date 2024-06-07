@@ -72,7 +72,7 @@ const RiverMap = () => {
                         <DateError />
                     </div>
                     <DateSelection />
-                    {date ? <DateNav/> : null}
+                    {/* {date ? <DateNav/> : null} */}
                 </div>
             </div>
         </div>

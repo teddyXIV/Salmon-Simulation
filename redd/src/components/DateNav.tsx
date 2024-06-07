@@ -1,11 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeDate, selectDate } from "../redux/dateSlice";
 
-const DateNav = () => {
+interface DateNavProps {
+    newDate: String,
+    setNewDate: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const DateNav = (props: DateNavProps) => {
+    const { newDate, setNewDate } = props
     const dispatch = useDispatch();
     const date = useSelector(selectDate);
 
     const prevDay = () => {
+        if (newDate) {
+            setNewDate("")
+            console.log("should be blank", newDate)
+        }
         const currentDate = new Date(date)
         currentDate.setDate(currentDate.getDate() - 1);
 
@@ -16,13 +26,18 @@ const DateNav = () => {
     }
 
     const nextDay = () => {
+        if (newDate) {
+            setNewDate("")
+
+        }
         const currentDate = new Date(date)
+
         currentDate.setDate(currentDate.getDate() + 1);
 
         const nextDate = currentDate.toISOString().slice(0, 10);
         
         dispatch(changeDate(nextDate));
-        console.log(date)
+
     }
 
     return (
