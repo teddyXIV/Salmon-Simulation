@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer } from "../helpers/arcGisHelpers/createMap"
+import { createMap, addDamLayer, addRiverLayer } from "../helpers/arcGisHelpers/createMap"
+import { createSalmonDataLayer } from "../helpers/arcGisHelpers/createSalmonDataLayer";
 import { getData } from "../helpers/dataHelpers/getData";
 import { useDispatch, useSelector } from "react-redux"
 import { selectDamCounts, setCount } from "../redux/damCountSlice"
 import DateSelection from "./DateSelection";
 import { selectDate } from "../redux/dateSlice";
 import DateError from "./DateError";
-import DateNav from "./DateNav";
 
 const RiverMap = () => {
     const mapRef = useRef(null)
@@ -15,11 +15,13 @@ const RiverMap = () => {
     const date = useSelector(selectDate)
     const dataFetchedRef = useRef(false);
     const [errorVisible, setErrorVisible] = useState<string>("hidden")
+    const [map, setMap] = useState<any>(null)
 
     useEffect(() => {
         if (!mapRef?.current) return;
 
         const view = createMap(mapRef.current);
+        setMap(view)
         addRiverLayer(view.map);
         addDamLayer(view.map);
 
@@ -50,13 +52,19 @@ const RiverMap = () => {
         if (!mapRef?.current || !date) return;
 
         if (allCounts.bon.length > 0) {
-            const view = createMap(mapRef.current);
-            addSalmonDataLayer(view.map, allCounts, date);
-            addDamLayer(view.map);
+
+            const salmonLayer = createSalmonDataLayer(allCounts, date);
+
+            if (map) {
+            map.map.add(salmonLayer)
+            }
 
             return () => {
-                view.destroy();
-            };
+                if (salmonLayer && map) {
+                    salmonLayer.destroy();
+                }
+            }
+
         }
 
     }, [dataFetchedRef.current])
@@ -70,7 +78,6 @@ const RiverMap = () => {
                         <DateError />
                     </div>
                     <DateSelection />
-                    {date ? <DateNav/> : null}
                 </div>
             </div>
         </div>
