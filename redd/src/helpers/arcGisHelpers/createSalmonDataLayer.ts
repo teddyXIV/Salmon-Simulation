@@ -1,4 +1,3 @@
-import Map from "@arcgis/core/Map";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Point from "@arcgis/core/geometry/Point";
 import { allPoints } from "../../data/riverPointsData";
@@ -6,7 +5,7 @@ import HeatmapRenderer from "@arcgis/core/renderers/HeatmapRenderer";
 import { DamCounts } from "../../types/damCountTypes";
 import { RiverPoints } from "../../types/riverPointTypes";
 
-export const addAllData = (map: Map, allCounts: DamCounts, date: string) => {
+export const createSalmonDataLayer = (allCounts: DamCounts, date: string) => {
 
     const dateIndex = allCounts.bon.findIndex(day => day.date === date);
 
@@ -151,9 +150,7 @@ export const addAllData = (map: Map, allCounts: DamCounts, date: string) => {
 
     const featureLayer = createFeatureLayer(features, heatmapRenderer);
 
-    map.add(featureLayer);
-    
-    return featureLayer.fields[0].name;
+    return featureLayer;
 }
 
 const createHeatmapRenderer = () => {

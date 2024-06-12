@@ -9,8 +9,6 @@ import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer";
 import { damData } from "../../data/damLocationData";
-import { addAllData } from "./addSalmonData";
-import { DamCounts } from "../../types/damCountTypes";
 
 export const createMap = (mapRef: HTMLDivElement) => {
     const map = new Map({
@@ -45,7 +43,6 @@ export const addDamLayer = (map: Map) => {
         })
 
         const marker = new SimpleMarkerSymbol({
-            // color: [175, 252, 65],
             color: [16,57,0],
             outline: {
                 color: [255,255,255],
@@ -98,18 +95,4 @@ export const addRiverLayer = (map: Map) => {
     })
 
     map.add(riverLayer)
-}
-
-export const addSalmonDataLayer = (map: Map, allCounts: DamCounts, date: string) => {
-    return addAllData(map, allCounts, date)
-    
-}
-
-export const removeSalmonDataLayer = (map: any, layerId: string) => {
-    const layer = map.findLayerById(layerId);
-    if (layer) {
-        map.removeLayer(layer)
-    } else {
-        console.warn(`Layer with ID ${layerId} not found`);
-    }
 }

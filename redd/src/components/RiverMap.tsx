@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { createMap, addDamLayer, addRiverLayer, addSalmonDataLayer, removeSalmonDataLayer } from "../helpers/arcGisHelpers/createMap"
+import { createMap, addDamLayer, addRiverLayer } from "../helpers/arcGisHelpers/createMap"
+import { createSalmonDataLayer } from "../helpers/arcGisHelpers/createSalmonDataLayer";
 import { getData } from "../helpers/dataHelpers/getData";
 import { useDispatch, useSelector } from "react-redux"
 import { selectDamCounts, setCount } from "../redux/damCountSlice"
@@ -50,22 +51,17 @@ const RiverMap = () => {
     useEffect(() => {
         if (!mapRef?.current || !date) return;
 
-        let layerId: string | null = null;
-
         if (allCounts.bon.length > 0) {
-            // const view = createMap(mapRef.current);
-            // layerId = date
-            layerId = addSalmonDataLayer(map.map, allCounts, date);
 
-            // addDamLayer(view.map);
+            const salmonLayer = createSalmonDataLayer(allCounts, date);
 
-            // return () => {
-            //     console.log("destroying");
-            //     map.destroy();
-            // };
+            if (map) {
+            map.map.add(salmonLayer)
+            }
+
             return () => {
-                if (layerId && map) {
-                    removeSalmonDataLayer(map.map, layerId);
+                if (salmonLayer && map) {
+                    salmonLayer.destroy();
                 }
             }
 

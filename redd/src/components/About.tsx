@@ -22,7 +22,3 @@ const About = () => {
 }
 
 export default About;
-
-// interface ModalControl {
-//     closeHandler: () => void
-// }
