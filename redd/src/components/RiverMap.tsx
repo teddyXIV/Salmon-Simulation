@@ -56,7 +56,7 @@ const RiverMap = () => {
             const salmonLayer = createSalmonDataLayer(allCounts, date);
 
             if (map) {
-            map.map.add(salmonLayer)
+                map.map.add(salmonLayer)
             }
 
             return () => {
