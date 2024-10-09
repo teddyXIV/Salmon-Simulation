@@ -14,10 +14,11 @@ export const getData = async (date: string) => {
             startDate: startDateString,
             endDate: date
         }
-        const res = await axios.get("http://127.0.0.1:8000/", { params: dates })
+        // const res = await axios.get("http://127.0.0.1:8000/", { params: dates })
+        const res = await axios.get("http://3.143.9.90:8000/", { params: dates })
         return res.data
     } catch (error) {
-        console.log("Error fetching user data", error)
+        console.log("Error fetching data", error)
 
         return "No data"
     }
