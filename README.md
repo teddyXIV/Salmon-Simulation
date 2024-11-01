@@ -18,6 +18,8 @@
 
 This application allows the user to enter a date and view an estimate of Chinook Salmon populations on a map of the Columbia River for the specified date. Data for the project are the daily dam counts of Chinook Salmon provided by the [Columbia River DART program](https://www.cbr.washington.edu/dart). 
 
+The repository for the backend of this project can be found here: [Salmon Backend](https://github.com/teddyXIV/salmon-backend)
+
 ## Known Bugs
 
 * Segments of the river can be missing data for some dates when data is not available from the Columbia River Dart Program. 
